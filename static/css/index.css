@@ -261,7 +261,7 @@ body {
 /* ── System overview ── */
 .system-fig {
   width: 150%;
-  max-width: 2000px;
+  max-width: 1500px;
   border-radius: 20px;
   box-shadow: var(--card-shadow);
   display: block;
