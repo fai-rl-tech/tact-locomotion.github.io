@@ -174,7 +174,7 @@
 
     /* ─── figure caption ─── */
     .reveal .fig-cap {
-      font-size: 0.45em; color: #888;
+      font-size: 0.7em; color: #888;
       margin-top: 0.25em; text-align: center;
     }
     .reveal .fig-cap.light { color: rgba(255,255,255,0.55); }
@@ -389,7 +389,7 @@
          alt="Overview of the proposed framework"
          style="width:100%;max-height:580px;object-fit:contain;">
   </div>
-  <div style="display:flex;justify-content:center;gap:3em;margin-top:0.4em;font-size:0.52em;color:#555;">
+  <div style="display:flex;justify-content:center;gap:3em;margin-top:0.4em;font-size:0.7em;color:#555;">
     <span><strong style="color:var(--indigo-dark);">DCM Foothold Planner</strong> — terrain-optimal landing targets + Bézier swing</span>
     <span><strong style="color:var(--indigo-dark);">Wrench Compliance Scheduler</strong> — virtual force + moment at load point</span>
   </div>
@@ -402,19 +402,21 @@
   <div class="act-tag dark">Act 2 — Method</div>
   <div class="slide-title">Multi-Channel Terrain Cost</div>
   <hr class="rule">
-  <p style="font-size:0.58em;color:#555;margin-bottom:0.4em;">
-    Planner minimises:
-    $\mathcal{J}_i = \alpha_\text{pos}\,d_{\text{pos},i} + \alpha_\text{dcm}\,d_{\text{dcm},i}
-    + \alpha_E E_i + \alpha_Q Q_i + \alpha_M M_i - \alpha_\text{climb}\,b_i$
-  </p>
-  <div class="two-col">
+  <div style="margin-top: 2em;margin-bottom: 2;"
+    <p style="font-size:1.0em;color:#555;margin-bottom:0.4em;">
+        Planner minimises:
+        $\mathcal{J}_i = \alpha_\text{pos}\,d_{\text{pos},i} + \alpha_\text{dcm}\,d_{\text{dcm},i}
+        + \alpha_E E_i + \alpha_Q Q_i + \alpha_M M_i - \alpha_\text{climb}\,b_i$
+    </p>
+  </div>
+  <div class="two-col" style="align-items:center;">
     <div class="col" style="text-align:center;">
-      <img src="./static/images/teaser_2.png"
+      <img src="./static/images/bezier_gap.png"
            alt="Terrain affordance channels on stair map"
-           style="width:100%;max-height:430px;object-fit:contain;">
+           style="width:70%;">
       <div class="fig-cap">Terrain affordance map — footholds coloured by cost</div>
     </div>
-    <div class="col">
+    <div class="col" style="font-size:1.5em;color:#444;line-height:1.6;">
       <div class="ch-box">
         <div class="ch-name">$Q_i$ — Flatness</div>
         Elevation range over footprint kernel. Flags edge landings where friction-cone admissibility collapses.
@@ -446,26 +448,26 @@
     <div class="col">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5em;">
         <div style="text-align:center;">
-          <img src="./static/images/bezier_step_up.png" alt="Step-up" style="width:100%;">
+          <img src="./static/images/bezier_step_up.png" alt="Step-up" style="width:80%;">
           <div class="fig-cap">(a) Step-up — apex over riser face</div>
         </div>
         <div style="text-align:center;">
-          <img src="./static/images/bezier_step_down.png" alt="Step-down" style="width:100%;">
+          <img src="./static/images/bezier_step_down.png" alt="Step-down" style="width:80%;">
           <div class="fig-cap">(b) Step-down — extended horizontal travel</div>
         </div>
         <div style="text-align:center;">
-          <img src="./static/images/bezier_gap.png" alt="Gap" style="width:100%;">
+          <img src="./static/images/bezier_gap.png" alt="Gap" style="width:80%;">
           <div class="fig-cap">(c) Gap crossing</div>
         </div>
         <div style="text-align:center;">
-          <img src="./static/images/bezier_flat.png" alt="Flat" style="width:100%;">
+          <img src="./static/images/bezier_flat.png" alt="Flat" style="width:80%;">
           <div class="fig-cap">(d) Flat terrain — symmetric arc</div>
         </div>
       </div>
     </div>
-    <div class="col" style="font-size:0.63em;color:#444;line-height:1.6;">
+    <div class="col" style="font-size:1.0em;color:#444;line-height:1.6;">
       <p>Apex $xy$ biased toward the higher endpoint:</p>
-      <p style="font-family:monospace;font-size:0.92em;background:var(--accent);
+      <p style="font-family:monospace;font-size:0.92em;
                 border-radius:6px;padding:0.3em 0.55em;margin:0.3em 0;">
         $\text{bias} = \mathrm{clip}(0.5 + \kappa\,\Delta z / h^*_\text{max},\,b_\text{min},\,b_\text{max})$
       </p>
@@ -488,7 +490,13 @@
   <div class="act-tag dark">Act 2 — Method</div>
   <div class="slide-title">Lower-Body Compliance Training</div>
   <hr class="rule">
-  <div class="two-col">
+  <div class="two-col" style="font-size:1.2em;align-items:center;">
+    <div class="col" style="text-align:center;">
+        <img src="static/images/body_point_cloud.png"
+            alt="Robot with point cloud"
+            style="width:70%;">
+        <div class="fig-cap">Lower-Body Compliance</div>
+    </div>
     <div class="col" style="font-size:0.62em;color:#444;line-height:1.6;">
       <p><strong style="color:var(--indigo-dark);">Key insight.</strong>
       Payload moment $\boldsymbol{\tau} = \mathbf{r}_\text{load}\times\mathbf{F}$ tilts the trunk.
@@ -503,27 +511,19 @@
       <p style="font-family:monospace;background:var(--accent);border-radius:6px;padding:0.3em 0.55em;font-size:0.9em;">
         $r_\text{comply} = -(z_\text{pel} - z^*_v)^2 - (\varphi_B - \varphi^*_v)^2 - (\psi_B - \psi^*_v)^2$
       </p>
-    </div>
-    <div class="col">
-      <div class="card-col">
-        <div class="card">
+      <div class="card-col" style="font-size: 1.0em;">
+        <div class="card" style="font-size: 1.0em;">
           <strong>Two-component wrench sampling</strong><br>
           Body-attached (60 %): cosine-power lobe toward $-\hat{\mathbf{z}}$ — vest/waist loads.<br>
           Arm-extended (40 %): forward-biased half-ellipsoid — large moment arms.<br>
           + 10 % isotropic coverage.
         </div>
-        <div class="card green">
+        <div class="card green" style="font-size: 1.0em;">
           <strong>What the policy learns</strong><br>
           Yield pelvis height to downward force;<br>
           yield trunk pitch/roll to induced moment.<br>
           Zero-shot at deployment — no force sensor, no retraining.
         </div>
-        <div style="text-align:center;margin-top:0.3em;">
-          <img src="./static/images/teaser_vinfast3.png"
-               alt="Robot with payload"
-               style="max-height:130px;width:auto;border-radius:6px;">
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -536,7 +536,7 @@
   <div class="slide-title light" style="text-align:center;margin-bottom:0.2em;">Training Setup</div>
   <hr class="rule light" style="margin:0 auto 0.6em;">
   <div class="stat-row" style="gap:0.8em;margin-bottom:0.5em;">
-    <div class="stat-box dark-bg"><div class="val">4 096</div><div class="lbl">parallel envs<br>MuJoCo</div></div>
+    <div class="stat-box dark-bg"><div class="val">8 192</div><div class="lbl">parallel envs<br>MuJoCo</div></div>
     <div class="stat-box dark-bg"><div class="val">PPO</div><div class="lbl">standard<br>no distillation</div></div>
     <div class="stat-box dark-bg"><div class="val">30 Hz</div><div class="lbl">depth CNN<br>4-frame stack</div></div>
     <div class="stat-box dark-bg"><div class="val">50 Hz</div><div class="lbl">policy freq.<br>on hardware</div></div>
@@ -751,7 +751,7 @@
   <div class="act-tag dark">Act 5 — Results</div>
   <div class="slide-title">Payload Generalization — Zero-Shot</div>
   <hr class="rule">
-  <div class="two-col" style="gap:0.8em;">
+  <div class="two-col" style="gap:0.8em;align-items: center;font-size: 1.3em;">
     <div class="col" style="text-align:center;">
       <img src="./static/images/payload_w_terrain.png"
            alt="SR and power vs payload"
@@ -785,14 +785,14 @@
   <div class="act-tag dark">Act 5 — Results</div>
   <div class="slide-title">Limitations</div>
   <hr class="rule">
-  <ul style="font-size:0.78em;color:#444;line-height:1.8;max-width:780px;margin:0.8em auto;">
+  <ul style="font-size:1.3em;color:#444;line-height:1.8;margin:0.8em auto;">
     <li>Quantitative ablations in <strong>simulation only</strong> — hardware demos are qualitative</li>
     <li>Hard-terrain SR reaches only <strong>30%</strong> on risers 0.22–0.28 m — tall stairs remain challenging</li>
     <li>Compliance benefit saturates at <strong>~20 kg</strong> centered load (near training distribution boundary)</li>
     <li>Terrain-cost weights are <strong>hand-tuned</strong>; forward-facing depth camera only — no lateral coverage</li>
     <li>Tangent-guided orientation degrades on slopes &gt;~15° (arc tangent ≠ surface normal)</li>
   </ul>
-  <div style="text-align:center;margin-top:0.8em;font-size:0.55em;color:#999;font-style:italic;">
+  <div style="text-align:center;margin-top:0.8em;font-size:0.7em;color:#999;font-style:italic;">
     Next: quantitative real-world evaluation &nbsp;·&nbsp; terrain × payload coupling study
   </div>
 </section>
