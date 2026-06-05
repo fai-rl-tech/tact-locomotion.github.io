@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TACT-ful — Video Presentation</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TACT-ful — Video Presentation</title>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
 
-  <script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Audiowide&family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+    <script>
     window.MathJax = {
       tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] }
     };
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+      async></script>
 
-  <style>
+    <style>
     /* ─── base ─── */
     :root {
       --indigo:      #3949ab;
@@ -27,7 +37,7 @@
       --green-light: #e8f5e9;
     }
     .reveal {
-      font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
       font-size: 24px;
     }
 
@@ -55,9 +65,11 @@
 
     /* ─── full-bleed overlay pattern (used on video+image bg slides) ─── */
     .reveal .overlay-caption {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.72));
-      padding: 2em 2.5em 1.4em;
+      position: absolute; bottom: 1.2em; left: 1.8em;
+      width: fit-content; max-width: 75%;
+      background: rgba(0,0,0,0.68);
+      padding: 0.5em 1.1em 0.6em;
+      border-radius: 8px;
       color: #fff;
       pointer-events: none;
     }
@@ -202,658 +214,920 @@
     .reveal ul li { margin-bottom: 0.25em; }
     .reveal p { margin: 0.18em 0; }
   </style>
-</head>
-<body>
-<div class="reveal">
-<div class="slides">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
 
-<!-- ══════════════════════════════════════════════════
+        <!-- ══════════════════════════════════════════════════
   SLIDE 01 — TITLE CARD   [0:00–0:05]
 ══════════════════════════════════════════════════ -->
-<section
-  data-autoslide="5000"
-  data-background-image="./static/images/teaser_vinfast1.png"
-  data-background-size="cover"
-  data-background-position="center"
-  data-background-opacity="0.32"
-  data-background-color="#0a0a1a">
-  <div style="text-align:center;padding:1.5em 0;">
-    <div style="font-size:3.2em;font-weight:900;letter-spacing:0.06em;color:#fff;line-height:1;">
-      TACT<span style="color:var(--indigo);">ful</span>
-    </div>
-    <div style="font-size:0.82em;font-weight:600;color:rgba(255,255,255,0.88);
-                margin:0.3em auto 0.5em;max-width:820px;line-height:1.4;">
-      Multi-Channel <b>T</b>errain <b>A</b>ffordance and <b>C</b>ompliance <b>T</b>raining<br>
-      for Payload-Robust Perceptive Humanoid Locomotion
-    </div>
-    <span style="display:inline-block;background:var(--indigo);color:#fff;
-                 border-radius:20px;padding:0.2em 1em;font-size:0.6em;font-weight:700;">
-      CoRL 2026 &nbsp;·&nbsp; Under Review
-    </span>
-    <div style="color:rgba(255,255,255,0.45);font-size:0.5em;margin-top:0.6em;">
-      Anonymous Authors &nbsp;·&nbsp; Anonymous Institution
-    </div>
-  </div>
-</section>
+        <section
+          data-autoslide="5000"
+          data-background-image="./static/images/teaser_vf1.png"
+          data-background-size="cover"
+          data-background-position="center"
+          data-background-opacity="0.32"
+          data-background-color="#0a0a1a">
+          <div style="text-align:center;padding:1.5em 0;">
+            <!-- Acronym — matches website .pita-acronym -->
+            <div style="font-family:'Audiowide','Inter',sans-serif;
+                        font-size:3.6em;font-weight:700;letter-spacing:0.08em;
+                        color:#fff;line-height:1;
+                        text-shadow:0 4px 30px rgba(0,0,0,0.4);
+                        margin-bottom:0.25em;">
+              TACT<span style="font-family:'Inter',sans-serif;font-weight:400;
+                               font-style:italic;letter-spacing:0.02em;opacity:0.9;">ful</span>
+            </div>
+            <!-- Paper title — matches website .paper-title-hero -->
+            <div
+              style="font-family:'Inter',sans-serif;font-size:1.3em;font-weight:700;
+                        color:#fff;max-width:1000px;margin:0 auto 0.6em;line-height:1.3;
+                        text-shadow:0 4px 30px rgba(0,0,0,0.4);">
+              Multi-Channel <span
+                style="color:#90caf9;font-style:italic;">T</span>errain
+              <span style="color:#90caf9;font-style:italic;">A</span>ffordance
+              and
+              <span style="color:#90caf9;font-style:italic;">C</span>ompliance
+              <span style="color:#90caf9;font-style:italic;">T</span>raining<br>
+              for Payload-Robust Perceptive Humanoid Locomotion
+            </div>
+            <!-- Venue badge — matches website .venue-badge -->
+            <span style="display:inline-block;background:rgba(255,255,255,0.15);
+                         color:#fff;border-radius:20px;padding:0.2em 1.1em;
+                         font-size:0.9em;font-weight:700;letter-spacing:0.05em;
+                         border:1px solid rgba(255,255,255,0.25);">
+              CoRL 2026 &nbsp;·&nbsp; Under Review
+            </span>
+            <div
+              style="color:rgba(255,255,255,0.4);font-size:0.72em;margin-top:0.55em;
+                        font-family:'Inter',sans-serif;">
+              Anonymous Authors &nbsp;·&nbsp; Anonymous Institution
+            </div>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
+        <!-- ══════════════════════════════════════════════════
   SLIDE 02 — BLIND LOCOMOTION FAILS   [0:05–0:15]
 ══════════════════════════════════════════════════ -->
-<section data-autoslide="10000" data-background-color="#0d0d1a">
-  <div class="act-tag">Act 1 — The Problem</div>
-  <div style="display:flex;gap:1em;align-items:center;height:880px;">
+        <section data-autoslide="10000" data-background-color="#0d0d1a">
+          <div class="act-tag">Act 1 — The Problem</div>
+          <div style="display:flex;gap:1em;align-items:center;height:880px;">
 
-    <!-- Video placeholder (left, large) -->
-    <div style="flex:1.4;height:100%;background:#111827;border:1.5px dashed #374151;
-                border-radius:10px;display:flex;flex-direction:column;
-                align-items:center;justify-content:center;gap:0.6em;padding:1.5em;">
-      <div style="font-size:2.8em;color:#6366f1;">▶</div>
-      <div style="font-size:0.7em;font-weight:700;color:#e2e8f0;text-align:center;">
-        REPLACE: External clip<br>Blind locomotion on stairs
-      </div>
-      <div style="font-size:0.52em;color:#6b7280;text-align:center;line-height:1.4;">
-        Any public clip of a legged robot<br>failing on a staircase without perception
-      </div>
-    </div>
+            <!-- Video: blind locomotion failure (left, large) -->
+            <div
+              style="flex:1.4;height:100%;display:flex;flex-direction:column;gap:0.3em;">
+              <div
+                style="flex:1;position:relative;border-radius:10px;overflow:hidden;background:#000;">
+                <video autoplay muted loop playsinline
+                  style="width:100%;height:100%;object-fit:cover;">
+                  <source src="./static/videos/Fail - Upstairs - Unitree.mp4"
+                    type="video/mp4">
+                </video>
+                <div style="position:absolute;bottom:0;left:0;right:0;
+                            background:linear-gradient(transparent,rgba(0,0,0,0.65));
+                            padding:0.6em 0.9em;font-size:0.52em;font-weight:700;
+                            color:rgba(255,255,255,0.75);letter-spacing:0.04em;">
+                  Blind policy · stair ascent failure
+                </div>
+              </div>
+              <div
+                style="font-size:0.42em;color:rgba(255,255,255,0.35);text-align:center;
+                          font-style:italic;padding:0.1em 0;">
+                Source: Online video, TikTok (China), retrieved 2025
+              </div>
+            </div>
 
-    <!-- Text right -->
-    <div style="flex:1;color:#fff;">
-      <div class="slide-title light" style="font-size:1.2em;">Blind Locomotion<br>Is Not Enough</div>
-      <hr class="rule light">
-      <div style="font-size:0.65em;color:rgba(255,255,255,0.8);line-height:1.7;margin-top:0.6em;">
-        <p>On flat ground — works well.</p>
-        <p style="margin-top:0.5em;">On structured terrain:</p>
-        <ul style="margin-top:0.2em;font-size:1em;color:rgba(255,255,255,0.75);">
-          <li>Sole straddles step edge → <strong style="color:#a5b4fc;">line contact</strong></li>
-          <li>Friction cone admissibility collapses</li>
-          <li>GRF needed to recover scales with total weight</li>
-        </ul>
-        <div style="margin-top:0.8em;background:rgba(99,102,241,0.18);border-left:3px solid #6366f1;
+            <!-- Text right -->
+            <div style="flex:1;color:#fff;">
+              <div class="slide-title light" style="font-size:1.2em;">Blind
+                Locomotion<br>Is Not Enough</div>
+              <hr class="rule light">
+              <div
+                style="font-size:0.95em;color:rgba(255,255,255,0.8);line-height:1.7;margin-top:0.6em;">
+                <p>On flat ground — works well.</p>
+                <p style="margin-top:0.5em;">On structured terrain:</p>
+                <ul
+                  style="margin-top:0.2em;font-size:1em;color:rgba(255,255,255,0.75);">
+                  <li>Sole straddles step edge → <strong
+                      style="color:#a5b4fc;">line contact</strong></li>
+                  <li>Friction cone admissibility collapses</li>
+                  <li>GRF needed to recover scales with total weight</li>
+                </ul>
+                <div
+                  style="margin-top:0.8em;background:rgba(99,102,241,0.18);border-left:3px solid #6366f1;
                     border-radius:0 8px 8px 0;padding:0.45em 0.65em;font-style:italic;color:#c7d2fe;">
-          Without foothold quality awareness,<br>the robot has no strategy for stairs.
-        </div>
-      </div>
-    </div>
+                  Without foothold quality awareness,<br>the robot has no
+                  strategy for stairs.
+                </div>
+              </div>
+            </div>
 
-  </div>
-</section>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
+        <!-- ══════════════════════════════════════════════════
   SLIDE 03 — PERCEPTIVE BUT NO PAYLOAD   [0:15–0:25]
 ══════════════════════════════════════════════════ -->
-<section data-autoslide="10000" data-background-color="#0d0d1a">
-  <div class="act-tag">Act 1 — The Problem</div>
-  <div class="slide-title light" style="text-align:center;margin-bottom:0.3em;">
-    Perceptive Locomotion — Still Not Enough
-  </div>
-  <div style="display:flex;gap:0.7em;height:740px;">
+        <section data-autoslide="10000" data-background-color="#0d0d1a">
+          <div class="act-tag">Act 1 — The Problem</div>
+          <div class="slide-title light"
+            style="text-align:center;margin-bottom:0.3em;">
+            Perceptive Locomotion — Still Not Enough
+          </div>
+          <div style="display:flex;gap:0.7em;height:740px;">
 
-    <!-- Left panel: perceptive success -->
-    <div style="flex:1;position:relative;background:#111827;border-radius:10px;overflow:hidden;
-                border:1.5px dashed #374151;">
-      <div style="position:absolute;inset:0;display:flex;flex-direction:column;
-                  align-items:center;justify-content:center;gap:0.5em;padding:1em;">
-        <div style="font-size:2em;color:#4ade80;">▶</div>
-        <div style="font-size:0.65em;font-weight:700;color:#e2e8f0;text-align:center;">
-          REPLACE: Perceptive policy<br>navigating stairs — no payload
-        </div>
-        <div style="font-size:0.5em;color:#6b7280;text-align:center;">
-          e.g. depth-camera policy, any lab
-        </div>
-      </div>
-      <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);
-                  padding:0.4em 0.7em;text-align:center;">
-        <span style="font-size:0.55em;font-weight:700;color:#4ade80;">✓ TERRAIN — succeeds</span>
-      </div>
-    </div>
+            <!-- Left panel: perceptive success without payload -->
+            <div style="flex:1;display:flex;flex-direction:column;gap:0.3em;">
+              <div
+                style="flex:1;position:relative;border-radius:10px;overflow:hidden;background:#000;">
+                <video autoplay muted loop playsinline
+                  style="width:100%;height:100%;object-fit:cover;">
+                  <source
+                    src="./static/videos/Successful Perceptive - No payload.mp4"
+                    type="video/mp4">
+                </video>
+                <div
+                  style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);
+                            padding:0.4em 0.7em;text-align:center;">
+                  <span style="font-size:0.55em;font-weight:700;color:#4ade80;">
+                    ✓ Perceptive — terrain, no payload
+                  </span>
+                </div>
+              </div>
+              <div
+                style="font-size:0.42em;color:rgba(255,255,255,0.35);text-align:center;
+                          font-style:italic;padding:0.1em 0;">
+                Skild AI Team, &ldquo;One Policy, All Scenarios,&rdquo;
+                <em>skild.ai</em>, Aug.&thinsp;2025
+              </div>
+            </div>
 
-    <!-- Right panel: perceptive + payload failure -->
-    <div style="flex:1;position:relative;background:#111827;border-radius:10px;overflow:hidden;
-                border:1.5px dashed #374151;">
-      <div style="position:absolute;inset:0;display:flex;flex-direction:column;
-                  align-items:center;justify-content:center;gap:0.5em;padding:1em;">
-        <div style="font-size:2em;color:#f87171;">▶</div>
-        <div style="font-size:0.65em;font-weight:700;color:#e2e8f0;text-align:center;">
-          REPLACE: Same policy<br>with payload — struggling or falling
-        </div>
-        <div style="font-size:0.5em;color:#6b7280;text-align:center;">
-          Use own sim baseline (no compliance training)
-        </div>
-      </div>
-      <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);
-                  padding:0.4em 0.7em;text-align:center;">
-        <span style="font-size:0.55em;font-weight:700;color:#f87171;">✗ + PAYLOAD — fails</span>
-      </div>
-    </div>
+            <!-- Right panel: payload failure -->
+            <div style="flex:1;display:flex;flex-direction:column;gap:0.3em;">
+              <div
+                style="flex:1;position:relative;border-radius:10px;overflow:hidden;background:#000;">
+                <video autoplay muted loop playsinline
+                  style="width:100%;height:100%;object-fit:cover;">
+                  <source src="./static/videos/Fail - Payload - BD.mp4"
+                    type="video/mp4">
+                </video>
+                <div
+                  style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);
+                            padding:0.4em 0.7em;text-align:center;">
+                  <span style="font-size:0.55em;font-weight:700;color:#f87171;">
+                    ✗ + Payload — policy fails
+                  </span>
+                </div>
+              </div>
+              <div
+                style="font-size:0.42em;color:rgba(255,255,255,0.35);text-align:center;
+                          font-style:italic;padding:0.1em 0;">
+                Boston Dynamics, online (retrieved 2025)
+              </div>
+            </div>
 
-  </div>
-  <div style="text-align:center;margin-top:0.5em;font-size:0.58em;
+          </div>
+          <div style="text-align:center;margin-top:0.5em;font-size:0.95em;
               color:rgba(255,255,255,0.55);line-height:1.5;">
-    CoM shifts · trunk tilts · capture point diverges · the policy has no answer
-  </div>
-</section>
+            CoM shifts · trunk tilts · capture point diverges · the policy has
+            no answer
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 04 — OUR SOLUTION   [0:25–0:32]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 04 — PRIOR WORK: PARTIAL PAYLOAD   [0:25–0:35]
 ══════════════════════════════════════════════════ -->
-<section
-  data-autoslide="7000"
-  data-background-image="./static/images/teaser_vinfast_14.png"
-  data-background-size="cover"
-  data-background-position="center"
-  data-background-opacity="0.38"
-  data-background-color="#0a0a1a">
-  <div style="text-align:center;padding-top:0.8em;">
-    <div style="font-size:0.6em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
-                color:rgba(255,255,255,0.45);margin-bottom:0.4em;">Our Approach</div>
-    <div style="font-size:1.55em;font-weight:900;color:#fff;line-height:1.25;margin-bottom:0.5em;">
-      One training run.<br>Terrain + Payload.
-    </div>
-    <div style="font-size:0.72em;color:rgba(255,255,255,0.75);margin-bottom:0.9em;
+        <section data-autoslide="10000" data-background-color="#0d0d1a">
+          <div class="act-tag">Act 1 — The Problem</div>
+          <div style="display:flex;gap:1em;align-items:center;height:880px;">
+
+            <!-- Video: robot carrying object downstairs (left, large) -->
+            <div
+              style="flex:1.4;height:100%;display:flex;flex-direction:column;gap:0.3em;">
+              <div
+                style="flex:1;position:relative;border-radius:10px;overflow:hidden;background:#000;">
+                <video autoplay muted loop playsinline
+                  style="width:100%;height:100%;object-fit:cover;">
+                  <source
+                    src="./static/videos/Successful perceptive - Fake payload.mp4"
+                    type="video/mp4">
+                </video>
+                <div style="position:absolute;bottom:0;left:0;right:0;
+                            background:linear-gradient(transparent,rgba(0,0,0,0.65));
+                            padding:0.6em 0.9em;font-size:0.52em;font-weight:700;
+                            color:rgba(255,255,255,0.75);letter-spacing:0.04em;">
+                  Object carrying downstairs — prior work
+                </div>
+              </div>
+              <div
+                style="font-size:0.42em;color:rgba(255,255,255,0.35);text-align:center;
+                          font-style:italic;padding:0.1em 0;">
+                Skild AI Team, &ldquo;One Policy, All Scenarios,&rdquo;
+                <em>skild.ai</em>, Aug.&thinsp;2025
+              </div>
+            </div>
+
+            <!-- Annotation right -->
+            <div style="flex:1;color:#fff;">
+              <div class="slide-title light"
+                style="font-size:1.1em;line-height:1.25;">
+                Prior Work:<br>Some Payload Capability
+              </div>
+              <hr class="rule light">
+              <div
+                style="font-size:0.95em;color:rgba(255,255,255,0.8);line-height:1.7;margin-top:0.6em;">
+                <p>Some systems demonstrate object carrying on stairs.</p>
+                <p style="margin-top:0.5em;">But key questions remain
+                  unanswered:</p>
+                <div
+                  style="margin-top:0.55em;display:flex;flex-direction:column;gap:0.4em;">
+                  <div
+                    style="background:rgba(251,191,36,0.12);border-left:3px solid #fbbf24;
+                              border-radius:0 6px 6px 0;padding:0.35em 0.6em;">
+                    <span style="color:#fbbf24;font-weight:700;">?</span>
+                    &nbsp;Payload weight not disclosed
+                  </div>
+                  <div
+                    style="background:rgba(251,191,36,0.12);border-left:3px solid #fbbf24;
+                              border-radius:0 6px 6px 0;padding:0.35em 0.6em;">
+                    <span style="color:#fbbf24;font-weight:700;">?</span>
+                    &nbsp;Compliance mechanism unspecified — possibly domain
+                    randomization or a rigid prop
+                  </div>
+                  <div
+                    style="background:rgba(251,191,36,0.12);border-left:3px solid #fbbf24;
+                              border-radius:0 6px 6px 0;padding:0.35em 0.6em;">
+                    <span style="color:#fbbf24;font-weight:700;">?</span>
+                    &nbsp;No generalization analysis across weights or moment
+                    arms
+                  </div>
+                </div>
+                <div style="margin-top:0.65em;font-style:italic;
+                            color:rgba(255,255,255,0.45);font-size:0.9em;">
+                  Does this scale to varied real loads?
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 05 — OUR SOLUTION   [0:35–0:42]
+══════════════════════════════════════════════════ -->
+        <section
+          data-autoslide="7000"
+          data-background-image="./static/images/teaser_vf_14.png"
+          data-background-size="cover"
+          data-background-position="center"
+          data-background-opacity="0.38"
+          data-background-color="#0a0a1a">
+          <div style="text-align:center;padding-top:0.8em;">
+            <div
+              style="font-size:0.6em;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+                color:rgba(255,255,255,0.45);margin-bottom:0.4em;">Our
+              Approach</div>
+            <div
+              style="font-size:1.55em;font-weight:900;color:#fff;line-height:1.25;margin-bottom:0.5em;">
+              Terrain cost + payload compliance,<br>trained jointly.
+            </div>
+            <div
+              style="font-size:0.95em;color:rgba(255,255,255,0.75);margin-bottom:0.9em;
                 font-weight:500;line-height:1.5;">
-      Multi-channel terrain awareness &amp; compliance — learned end-to-end with standard PPO.
-    </div>
-    <div class="stat-row">
-      <div class="stat-box">
-        <div class="val">1.0 m/s</div>
-        <div class="lbl">on stairs<br>0.20 m risers</div>
-      </div>
-      <div class="stat-box">
-        <div class="val">~15 kg</div>
-        <div class="lbl">zero-shot<br>payload</div>
-      </div>
-      <div class="stat-box">
-        <div class="val">50 Hz</div>
-        <div class="lbl">policy<br>frequency</div>
-      </div>
-      <div class="stat-box">
-        <div class="val">0-shot</div>
-        <div class="lbl">sim-to-real<br>transfer</div>
-      </div>
-    </div>
-    <div style="margin-top:0.6em;font-size:0.52em;color:rgba(255,255,255,0.4);">
-      No distillation &nbsp;·&nbsp; No teacher-student staging &nbsp;·&nbsp; No force sensor
-    </div>
-  </div>
-</section>
+              Multi-channel terrain awareness &amp; compliance — learned
+              end-to-end with standard PPO.
+            </div>
+            <div class="stat-row">
+              <div class="stat-box">
+                <div class="val">1.0 m/s</div>
+                <div class="lbl">on stairs<br>0.20 m risers</div>
+              </div>
+              <div class="stat-box">
+                <div class="val">~15 kg</div>
+                <div class="lbl">zero-shot<br>payload</div>
+              </div>
+              <div class="stat-box">
+                <div class="val">50 Hz</div>
+                <div class="lbl">policy<br>frequency</div>
+              </div>
+              <div class="stat-box">
+                <div class="val">0-shot</div>
+                <div class="lbl">sim-to-real<br>transfer</div>
+              </div>
+            </div>
+            <div
+              style="margin-top:0.6em;font-size:0.52em;color:rgba(255,255,255,0.4);">
+              No distillation &nbsp;·&nbsp; No teacher-student staging
+              &nbsp;·&nbsp; No force sensor
+            </div>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 05 — SYSTEM OVERVIEW   [0:32–0:42]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 06 — SYSTEM OVERVIEW   [0:42–0:54]
 ══════════════════════════════════════════════════ -->
-<section data-autoslide="10000" data-background-color="#ffffff">
-  <div class="act-tag dark">Act 2 — Method</div>
-  <div class="slide-title">System Overview</div>
-  <hr class="rule">
-  <div style="text-align:center;">
-    <img src="./static/images/System Overview - Perceptive.svg"
-         alt="Overview of the proposed framework"
-         style="width:100%;max-height:580px;object-fit:contain;">
-  </div>
-  <div style="display:flex;justify-content:center;gap:3em;margin-top:0.4em;font-size:0.7em;color:#555;">
-    <span><strong style="color:var(--indigo-dark);">DCM Foothold Planner</strong> — terrain-optimal landing targets + Bézier swing</span>
-    <span><strong style="color:var(--indigo-dark);">Wrench Compliance Scheduler</strong> — virtual force + moment at load point</span>
-  </div>
-</section>
+        <section data-autoslide="12000" data-background-color="#ffffff">
+          <div class="act-tag dark">Act 2 — Method</div>
+          <div class="slide-title">System Overview</div>
+          <hr class="rule">
+          <div style="text-align:center;">
+            <img src="./static/images/System Overview - Perceptive.svg"
+              alt="Overview of the proposed framework"
+              style="width:100%;max-height:580px;object-fit:contain;">
+          </div>
+          <div
+            style="display:flex;justify-content:center;gap:3em;margin-top:0.4em;font-size:0.95em;color:#555;">
+            <span><strong style="color:var(--indigo-dark);">DCM Foothold
+                Planner</strong> — terrain-optimal landing targets + Bézier
+              swing</span>
+            <span><strong style="color:var(--indigo-dark);">Wrench Compliance
+                Scheduler</strong> — virtual force + moment at load point</span>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 06 — MULTI-CHANNEL TERRAIN COST   [0:42–0:54]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 07 — MULTI-CHANNEL TERRAIN COST   [0:54–1:06]
 ══════════════════════════════════════════════════ -->
-<section data-autoslide="12000" data-background-color="#f0f2ff">
-  <div class="act-tag dark">Act 2 — Method</div>
-  <div class="slide-title">Multi-Channel Terrain Cost</div>
-  <hr class="rule">
-  <div style="margin-top: 2em;margin-bottom: 2;"
-    <p style="font-size:1.0em;color:#555;margin-bottom:0.4em;">
-        Planner minimises:
-        $\mathcal{J}_i = \alpha_\text{pos}\,d_{\text{pos},i} + \alpha_\text{dcm}\,d_{\text{dcm},i}
-        + \alpha_E E_i + \alpha_Q Q_i + \alpha_M M_i - \alpha_\text{climb}\,b_i$
-    </p>
-  </div>
-  <div class="two-col" style="align-items:center;">
-    <div class="col" style="text-align:center;">
-      <img src="./static/images/bezier_gap.png"
-           alt="Terrain affordance channels on stair map"
-           style="width:70%;">
-      <div class="fig-cap">Terrain affordance map — footholds coloured by cost</div>
-    </div>
-    <div class="col" style="font-size:1.5em;color:#444;line-height:1.6;">
-      <div class="ch-box">
-        <div class="ch-name">$Q_i$ — Flatness</div>
-        Elevation range over footprint kernel. Flags edge landings where friction-cone admissibility collapses.
-      </div>
-      <div class="ch-box">
-        <div class="ch-name">$E_i$ — Steepness</div>
-        Max-pooled Sobel gradient. Propagates the worst riser gradient within the footprint.
-      </div>
-      <div class="ch-box">
-        <div class="ch-name">$M_i$ — Height Feasibility</div>
-        Quadratic penalty above velocity-aware $h^*_\text{eff}(v_x)$. Low speed = reduced reach.
-      </div>
-      <div class="ch-box green">
-        <div class="ch-name">$b_i$ — Climb Bonus</div>
-        Speed-gated reward for stepping up onto reachable treads, capped at $h^*_\text{eff}$.
-      </div>
-    </div>
-  </div>
-</section>
+        <section data-autoslide="12000" data-background-color="#f0f2ff">
+          <div class="act-tag dark">Act 2 — Method</div>
+          <div class="slide-title">Multi-Channel Terrain Cost</div>
+          <hr class="rule">
+          <p style="font-size:1.0em;color:#555;margin-bottom:0.4em;">
+            Planner minimises:
+            $\mathcal{J}_i = \alpha_\text{pos}\,d_{\text{pos},i} +
+            \alpha_\text{dcm}\,d_{\text{dcm},i}
+            + \alpha_E E_i + \alpha_Q Q_i + \alpha_M M_i -
+            \alpha_\text{climb}\,b_i$
+          </p>
+          <div class="two-col" style="align-items:center;">
+            <div class="col" style="text-align:center;">
+              <img src="./static/images/bezier_gap.png"
+                alt="Terrain affordance channels on stair map"
+                style="width:70%;">
+              <div class="fig-cap">Terrain affordance map — footholds coloured
+                by
+                cost</div>
+            </div>
+            <div class="col"
+              style="font-size:1.6em;color:#444;line-height:1.6;">
+              <div class="ch-box">
+                <div class="ch-name">$Q_i$ — Flatness</div>
+                Elevation range over footprint kernel. Flags edge landings where
+                friction-cone admissibility collapses.
+              </div>
+              <div class="ch-box">
+                <div class="ch-name">$E_i$ — Steepness</div>
+                Max-pooled Sobel gradient. Propagates the worst riser gradient
+                within the footprint.
+              </div>
+              <div class="ch-box">
+                <div class="ch-name">$M_i$ — Height Feasibility</div>
+                Quadratic penalty above velocity-aware $h^*_\text{eff}(v_x)$.
+                Low
+                speed = reduced reach.
+              </div>
+              <div class="ch-box green">
+                <div class="ch-name">$b_i$ — Climb Bonus</div>
+                Speed-gated reward for stepping up onto reachable treads, capped
+                at $h^*_\text{eff}$.
+              </div>
+            </div>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 07 — BÉZIER SWING & ORIENTATION   [0:54–1:04]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 08 — BÉZIER SWING & ORIENTATION   [1:06–1:19]
 ══════════════════════════════════════════════════ -->
-<section data-autoslide="10000" data-background-color="#ffffff">
-  <div class="act-tag dark">Act 2 — Method</div>
-  <div class="slide-title">Bézier Swing &amp; Tangent-Guided Foot Orientation</div>
-  <hr class="rule">
-  <div class="two-col" style="align-items:center;">
-    <div class="col">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5em;">
-        <div style="text-align:center;">
-          <img src="./static/images/bezier_step_up.png" alt="Step-up" style="width:80%;">
-          <div class="fig-cap">(a) Step-up — apex over riser face</div>
-        </div>
-        <div style="text-align:center;">
-          <img src="./static/images/bezier_step_down.png" alt="Step-down" style="width:80%;">
-          <div class="fig-cap">(b) Step-down — extended horizontal travel</div>
-        </div>
-        <div style="text-align:center;">
-          <img src="./static/images/bezier_gap.png" alt="Gap" style="width:80%;">
-          <div class="fig-cap">(c) Gap crossing</div>
-        </div>
-        <div style="text-align:center;">
-          <img src="./static/images/bezier_flat.png" alt="Flat" style="width:80%;">
-          <div class="fig-cap">(d) Flat terrain — symmetric arc</div>
-        </div>
-      </div>
-    </div>
-    <div class="col" style="font-size:1.0em;color:#444;line-height:1.6;">
-      <p>Apex $xy$ biased toward the higher endpoint:</p>
-      <p style="font-family:monospace;font-size:0.92em;
-                border-radius:6px;padding:0.3em 0.55em;margin:0.3em 0;">
-        $\text{bias} = \mathrm{clip}(0.5 + \kappa\,\Delta z / h^*_\text{max},\,b_\text{min},\,b_\text{max})$
-      </p>
-      <div class="ch-box" style="margin-top:0.6em;font-size:0.95em;">
-        <div class="ch-name">Pre-apex orientation</div>
-        $\dot{\mathbf{p}}$ rotated 90° in sagittal plane → sole clears riser, reduces toe-strike risk.
-      </div>
-      <div class="ch-box" style="font-size:0.95em;">
-        <div class="ch-name">Post-apex orientation</div>
-        $\hat{\mathbf{t}}_f = \dot{\mathbf{p}}/\|\dot{\mathbf{p}}\|$ → flat-sole tread landing.
-      </div>
-    </div>
-  </div>
-</section>
+        <section data-autoslide="13000" data-background-color="#ffffff">
+          <div class="act-tag dark">Act 2 — Method</div>
+          <div class="slide-title">Bézier Swing &amp; Tangent-Guided Foot
+            Orientation</div>
+          <hr class="rule">
+          <div class="two-col" style="align-items:center;">
+            <div class="col">
+              <div
+                style="display:grid;grid-template-columns:1fr 1fr;gap:0.5em;">
+                <div style="text-align:center;">
+                  <img src="./static/images/bezier_step_up.png" alt="Step-up"
+                    style="width:80%;">
+                  <div class="fig-cap">(a) Step-up — apex over riser face</div>
+                </div>
+                <div style="text-align:center;">
+                  <img src="./static/images/bezier_step_down.png"
+                    alt="Step-down"
+                    style="width:80%;">
+                  <div class="fig-cap">(b) Step-down — extended horizontal
+                    travel</div>
+                </div>
+                <div style="text-align:center;">
+                  <img src="./static/images/bezier_gap.png" alt="Gap"
+                    style="width:80%;">
+                  <div class="fig-cap">(c) Gap crossing</div>
+                </div>
+                <div style="text-align:center;">
+                  <img src="./static/images/bezier_flat.png" alt="Flat"
+                    style="width:80%;">
+                  <div class="fig-cap">(d) Flat terrain — symmetric arc</div>
+                </div>
+              </div>
+            </div>
+            <div class="col"
+              style="font-size:1.6em;color:#444;line-height:1.6;">
+              <p style="font-size:0.62em;margin-bottom:0.3em;">Apex $xy$ biased
+                toward the higher endpoint:</p>
+              <p
+                style="font-family:monospace;background:var(--accent);border-radius:6px;
+                padding:0.3em 0.55em;font-size:0.57em;margin:0 0 0.45em;">
+                $\text{bias} = \mathrm{clip}(0.5 + \kappa\,\Delta z /
+                h^*_\text{max},\,b_\text{min},\,b_\text{max})$
+              </p>
+              <div class="ch-box">
+                <div class="ch-name">Pre-apex orientation</div>
+                $\dot{\mathbf{p}}$ rotated 90° in sagittal plane → sole clears
+                riser, reduces toe-strike risk.
+              </div>
+              <div class="ch-box">
+                <div class="ch-name">Post-apex orientation</div>
+                $\hat{\mathbf{t}}_f = \dot{\mathbf{p}}/\|\dot{\mathbf{p}}\|$ →
+                flat-sole tread landing.
+              </div>
+            </div>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 08 — COMPLIANCE TRAINING   [1:04–1:16]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 09 — COMPLIANCE TRAINING   [1:19–1:35]
 ══════════════════════════════════════════════════ -->
-<section data-autoslide="12000" data-background-color="#ffffff">
-  <div class="act-tag dark">Act 2 — Method</div>
-  <div class="slide-title">Lower-Body Compliance Training</div>
-  <hr class="rule">
-  <div class="two-col" style="font-size:1.2em;align-items:center;">
-    <div class="col" style="text-align:center;">
-        <img src="static/images/body_point_cloud.png"
-            alt="Robot with point cloud"
-            style="width:70%;">
-        <div class="fig-cap">Lower-Body Compliance</div>
-    </div>
-    <div class="col" style="font-size:0.62em;color:#444;line-height:1.6;">
-      <p><strong style="color:var(--indigo-dark);">Key insight.</strong>
-      Payload moment $\boldsymbol{\tau} = \mathbf{r}_\text{load}\times\mathbf{F}$ tilts the trunk.
-      Under LIPM, CoM offset grows by $e^{\omega_0 T_\text{step}} > 2$ per step —
-      more destabilising than an equivalent translational offset.</p>
-      <p style="margin-top:0.5em;"><strong style="color:var(--indigo-dark);">Virtual spring-damper at load point:</strong></p>
-      <p style="font-family:monospace;background:var(--accent);border-radius:6px;padding:0.3em 0.55em;font-size:0.92em;">
-        $\mathbf{F}_\text{ext}(t) = k(\mathbf{p}_a - \mathbf{p}_\text{load}) - c\,\dot{\mathbf{p}}_\text{load}$
-      </p>
-      <p style="margin-top:0.4em;">Applied at $\mathbf{p}_\text{load}$ auto-generates $\boldsymbol{\tau}_\text{ext}$.</p>
-      <p style="margin-top:0.5em;"><strong style="color:var(--indigo-dark);">Compliance reward:</strong></p>
-      <p style="font-family:monospace;background:var(--accent);border-radius:6px;padding:0.3em 0.55em;font-size:0.9em;">
-        $r_\text{comply} = -(z_\text{pel} - z^*_v)^2 - (\varphi_B - \varphi^*_v)^2 - (\psi_B - \psi^*_v)^2$
-      </p>
-      <div class="card-col" style="font-size: 1.0em;">
-        <div class="card" style="font-size: 1.0em;">
-          <strong>Two-component wrench sampling</strong><br>
-          Body-attached (60 %): cosine-power lobe toward $-\hat{\mathbf{z}}$ — vest/waist loads.<br>
-          Arm-extended (40 %): forward-biased half-ellipsoid — large moment arms.<br>
-          + 10 % isotropic coverage.
-        </div>
-        <div class="card green" style="font-size: 1.0em;">
-          <strong>What the policy learns</strong><br>
-          Yield pelvis height to downward force;<br>
-          yield trunk pitch/roll to induced moment.<br>
-          Zero-shot at deployment — no force sensor, no retraining.
-        </div>
-    </div>
-  </div>
-</section>
+        <section data-autoslide="16000" data-background-color="#ffffff">
+          <div class="act-tag dark">Act 2 — Method</div>
+          <div class="slide-title">Lower-Body Compliance Training</div>
+          <hr class="rule">
+          <div class="two-col" style="align-items:center;">
+            <div class="col" style="text-align:center;">
+              <img src="static/images/body_point_cloud.png"
+                alt="Robot with point cloud"
+                style="width:70%;">
+              <div class="fig-cap">Lower-Body Compliance</div>
+            </div>
+            <div class="col"
+              style="font-size:1.6em;color:#444;line-height:1.6;">
+              <p style="font-size:0.62em;margin-bottom:0.45em;">
+                Payload moment $\boldsymbol{\tau} =
+                \mathbf{r}_\text{load}\times\mathbf{F}$
+                tilts the trunk — CoM offset compounds per step under LIPM.
+              </p>
+              <p style="font-size:0.62em;margin-bottom:0.3em;">
+                <strong style="color:var(--indigo-dark);">Virtual spring-damper
+                  at load point:</strong>
+              </p>
+              <p
+                style="font-family:monospace;background:var(--accent);border-radius:6px;
+                      padding:0.3em 0.55em;font-size:0.57em;">
+                $\mathbf{F}_\text{ext}(t) = k(\mathbf{p}_a -
+                \mathbf{p}_\text{load})
+                - c\,\dot{\mathbf{p}}_\text{load}$
+              </p>
+              <div class="card-col" style="margin-top:0.6em;">
+                <div class="card">
+                  <strong>Force + moment — no payload mass in sim</strong><br>
+                  54 % body-attached &nbsp;·&nbsp; 36 % arm-extended
+                  &nbsp;·&nbsp; 10 % isotropic
+                </div>
+                <div class="card green">
+                  <strong>Policy yields trunk &amp; pelvis</strong><br>
+                  No force sensor &nbsp;·&nbsp; No retraining at deployment
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 09 — TRAINING PIPELINE   [1:16–1:22]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 10 — TRAINING PIPELINE   [1:35–1:41]
 ══════════════════════════════════════════════════ -->
-<section data-autoslide="6000" data-background-color="#1a237e">
-  <div class="act-tag" style="color:rgba(255,255,255,0.35);">Act 2 — Method</div>
-  <div class="slide-title light" style="text-align:center;margin-bottom:0.2em;">Training Setup</div>
-  <hr class="rule light" style="margin:0 auto 0.6em;">
-  <div class="stat-row" style="gap:0.8em;margin-bottom:0.5em;">
-    <div class="stat-box dark-bg"><div class="val">8 192</div><div class="lbl">parallel envs<br>MuJoCo</div></div>
-    <div class="stat-box dark-bg"><div class="val">PPO</div><div class="lbl">standard<br>no distillation</div></div>
-    <div class="stat-box dark-bg"><div class="val">30 Hz</div><div class="lbl">depth CNN<br>4-frame stack</div></div>
-    <div class="stat-box dark-bg"><div class="val">50 Hz</div><div class="lbl">policy freq.<br>on hardware</div></div>
-    <div class="stat-box dark-bg"><div class="val">20 k</div><div class="lbl">training<br>iterations</div></div>
-    <div class="stat-box dark-bg"><div class="val">0-shot</div><div class="lbl">sim-to-real<br>no fine-tuning</div></div>
-  </div>
-  <div style="text-align:center;font-size:0.55em;color:rgba(255,255,255,0.45);margin-top:0.4em;">
-    No teacher-student staging &nbsp;·&nbsp; Asymmetric actor-critic &nbsp;·&nbsp; Domain randomization for sim-to-real gap
-  </div>
-</section>
+        <section data-autoslide="6000" data-background-color="#1a237e">
+          <div class="act-tag" style="color:rgba(255,255,255,0.35);">Act 2 —
+            Method</div>
+          <div class="slide-title light"
+            style="text-align:center;margin-bottom:0.2em;">Training Setup</div>
+          <hr class="rule light" style="margin:0 auto 0.6em;">
+          <div class="stat-row" style="gap:0.8em;margin-bottom:0.5em;">
+            <div class="stat-box dark-bg"><div class="val">8192</div><div
+                class="lbl">parallel envs<br>MuJoCo</div></div>
+            <div class="stat-box dark-bg"><div class="val">PPO</div><div
+                class="lbl">standard<br>no distillation</div></div>
+            <div class="stat-box dark-bg"><div class="val">30 Hz</div><div
+                class="lbl">depth CNN<br>4-frame stack</div></div>
+            <div class="stat-box dark-bg"><div class="val">50 Hz</div><div
+                class="lbl">policy freq.<br>on hardware</div></div>
+            <div class="stat-box dark-bg"><div class="val">20 k</div><div
+                class="lbl">training<br>iterations</div></div>
+            <div class="stat-box dark-bg"><div class="val">0-shot</div><div
+                class="lbl">sim-to-real<br>no fine-tuning</div></div>
+          </div>
+          <div
+            style="text-align:center;font-size:0.55em;color:rgba(255,255,255,0.45);margin-top:0.4em;">
+            No teacher-student staging &nbsp;·&nbsp; Asymmetric actor-critic
+            &nbsp;·&nbsp; Domain randomization for sim-to-real gap
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 10 — SIM: BASELINE + LIGHT PAYLOADS   [1:22–1:37]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 11 — SIM: BASELINE + LIGHT PAYLOADS   [1:41–1:56]
 ══════════════════════════════════════════════════ -->
-<section data-autoslide="15000" data-background-color="#0d0d1a">
-  <div class="act-tag" style="color:rgba(99,102,241,0.7);">Act 3 — Simulation</div>
-  <div style="font-size:0.72em;font-weight:700;color:rgba(255,255,255,0.6);
+        <section data-autoslide="15000" data-background-color="#0d0d1a">
+          <div class="act-tag" style="color:rgba(99,102,241,0.7);">Act 3 —
+            Simulation</div>
+          <div
+            style="font-size:0.72em;font-weight:700;color:rgba(255,255,255,0.6);
               text-align:center;margin-bottom:0.5em;letter-spacing:0.05em;">
-    SIMULATION RESULTS — Payload Generalization
-  </div>
-  <div class="sim-panels">
+            SIMULATION RESULTS — Payload Generalization
+          </div>
+          <div class="sim-panels">
 
-    <div class="sim-ph">
-      <div class="play">▶</div>
-      <div class="sim-label">No Payload<br>Baseline</div>
-      <div class="sim-desc">Stair traversal · 1.0 m/s<br>Drop file: <code>sim_no_payload.mp4</code></div>
-      <div class="sim-bottom">Baseline · no load</div>
-    </div>
+            <div class="sim-ph">
+              <video autoplay muted loop playsinline>
+                <source src="./static/videos/vr_m3_1_nopayload.mp4"
+                  type="video/mp4">
+              </video>
+              <div class="sim-bottom">Baseline · no load</div>
+            </div>
 
-    <div class="sim-ph">
-      <div class="play">▶</div>
-      <div class="sim-label">Front-Mounted Backpack</div>
-      <div class="sim-desc">5 kg · pelvis drops, absorbed<br>Drop file: <code>sim_front_backpack_5kg.mp4</code></div>
-      <div class="sim-bottom">Front · 5 kg</div>
-    </div>
+            <div class="sim-ph">
+              <video autoplay muted loop playsinline>
+                <source src="./static/videos/vr_m3_1_front_backpack.mp4"
+                  type="video/mp4">
+              </video>
+              <div class="sim-bottom">Front · 5 kg</div>
+            </div>
 
-    <div class="sim-ph">
-      <div class="play">▶</div>
-      <div class="sim-label">Rear-Mounted Backpack</div>
-      <div class="sim-desc">5 kg · trunk pitches back<br>Drop file: <code>sim_rear_backpack_5kg.mp4</code></div>
-      <div class="sim-bottom">Rear · 5 kg</div>
-    </div>
+            <div class="sim-ph">
+              <video autoplay muted loop playsinline>
+                <source src="./static/videos/vr_m3_1_backpack.mp4"
+                  type="video/mp4">
+              </video>
+              <div class="sim-bottom">Rear · 5 kg</div>
+            </div>
 
-  </div>
-</section>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 11 — SIM: HEAVY + COMPLEX PAYLOADS   [1:37–1:52]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 12 — SIM: HEAVY + COMPLEX PAYLOADS   [1:56–2:11]
 ══════════════════════════════════════════════════ -->
-<section data-autoslide="15000" data-background-color="#0d0d1a">
-  <div class="act-tag" style="color:rgba(99,102,241,0.7);">Act 3 — Simulation</div>
-  <div style="font-size:0.72em;font-weight:700;color:rgba(255,255,255,0.6);
+        <section data-autoslide="15000" data-background-color="#0d0d1a">
+          <div class="act-tag" style="color:rgba(99,102,241,0.7);">Act 3 —
+            Simulation</div>
+          <div
+            style="font-size:0.72em;font-weight:700;color:rgba(255,255,255,0.6);
               text-align:center;margin-bottom:0.5em;letter-spacing:0.05em;">
-    SIMULATION RESULTS — Challenging Scenarios
-  </div>
-  <div class="sim-panels">
+            SIMULATION RESULTS — Challenging Scenarios
+          </div>
+          <div class="sim-panels">
 
-    <div class="sim-ph">
-      <div class="play">▶</div>
-      <div class="sim-label">Front + Rear Backpacks</div>
-      <div class="sim-desc">10 kg combined · zero-shot<br>Drop file: <code>sim_both_backpacks_10kg.mp4</code></div>
-      <div class="sim-bottom">Front + Rear · 10 kg</div>
-    </div>
+            <div class="sim-ph">
+              <video autoplay muted loop playsinline>
+                <source src="./static/videos/vr_m3_1_both_backpack.mp4"
+                  type="video/mp4">
+              </video>
+              <div class="sim-bottom">Front + Rear · 10 kg</div>
+            </div>
 
-    <div class="sim-ph">
-      <div class="play">▶</div>
-      <div class="sim-label">Basket of Weighted Blocks</div>
-      <div class="sim-desc">5 × 1 kg blocks · dynamic shifting<br>Drop file: <code>sim_basket_5kg.mp4</code></div>
-      <div class="sim-bottom">Basket · 5 kg</div>
-    </div>
+            <div class="sim-ph">
+              <video autoplay muted loop playsinline>
+                <source src="./static/videos/vr_m3_1_basket.mp4"
+                  type="video/mp4">
+              </video>
+              <div class="sim-bottom">Basket · 5 kg</div>
+            </div>
 
-    <div class="sim-ph">
-      <div class="play">▶</div>
-      <div class="sim-label">Car Door</div>
-      <div class="sim-desc">~5 kg · largest moment arm<br>Drop file: <code>sim_car_door_5kg.mp4</code></div>
-      <div class="sim-bottom">Car Door · ~5 kg</div>
-    </div>
+            <div class="sim-ph">
+              <video autoplay muted loop playsinline
+                style="object-position: right center;">
+                <source src="./static/videos/vr_m3_1_vf.mp4"
+                  type="video/mp4">
+              </video>
+              <div class="sim-bottom">Car Door · ~5 kg</div>
+            </div>
 
-  </div>
-  <div style="text-align:center;margin-top:0.5em;font-size:0.52em;color:rgba(255,255,255,0.35);">
-    All zero-shot · no payload-specific fine-tuning · single training run
-  </div>
-</section>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 12 — REAL: STAIR TRAVERSAL   [1:52–2:00]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 13 — REAL: STAIR TRAVERSAL   [2:02–2:10]
 ══════════════════════════════════════════════════ -->
-<section
-  data-autoslide="8000"
-  data-background-video="./static/videos/stair_traversal.mp4"
-  data-background-video-muted="true"
-  data-background-video-loop="true"
-  data-background-size="cover"
-  data-background-color="#000">
-  <div class="act-tag">Act 4 — Real Robot</div>
-  <div class="overlay-caption">
-    <div class="cap-label">Real Robot &nbsp;·&nbsp; Zero-shot from simulation</div>
-    <div class="cap-main">Stair traversal &nbsp;·&nbsp; risers up to 0.20 m &nbsp;·&nbsp; 1.0 m/s</div>
-  </div>
-</section>
+        <section
+          data-autoslide="8000"
+          data-background-video="./static/videos/stair_traversal.mp4"
+          data-background-video-muted="true"
+          data-background-video-loop="true"
+          data-background-size="cover"
+          data-background-color="#000">
+          <div class="act-tag">Act 4 — Real Robot</div>
+          <div class="overlay-caption">
+            <div class="cap-label">Real Robot &nbsp;·&nbsp; Zero-shot from
+              simulation</div>
+            <div class="cap-main">Stair traversal &nbsp;·&nbsp; risers up to
+              0.20 m &nbsp;·&nbsp; 1.0 m/s</div>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 13 — REAL: 7 KG WRIST PAYLOAD   [2:00–2:08]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 14 — REAL: 7 KG WRIST PAYLOAD   [2:19–2:32]
 ══════════════════════════════════════════════════ -->
-<section
-  data-autoslide="8000"
-  data-background-video="./static/videos/up_stair_traversal_7kg.mp4"
-  data-background-video-muted="true"
-  data-background-video-loop="true"
-  data-background-size="cover"
-  data-background-color="#000">
-  <div class="act-tag">Act 4 — Real Robot</div>
-  <div class="overlay-caption">
-    <div class="cap-label">Real Robot &nbsp;·&nbsp; Moment-dominated load</div>
-    <div class="cap-main">Wrist-mounted tray &nbsp;·&nbsp; 7 kg</div>
-    <div><span class="cap-badge">65% SR &nbsp;vs.&nbsp; 50% baseline</span></div>
-  </div>
-</section>
+        <section
+          data-autoslide="13000"
+          data-background-video="./static/videos/up_stair_traversal_7kg.mp4"
+          data-background-video-muted="true"
+          data-background-video-loop="true"
+          data-background-size="cover"
+          data-background-color="#000">
+          <div class="act-tag">Act 4 — Real Robot</div>
+          <div class="overlay-caption">
+            <div class="cap-label">Real Robot &nbsp;·&nbsp; Moment-dominated
+              load</div>
+            <div class="cap-main">Wrist-mounted tray &nbsp;·&nbsp; 7 kg
+              &nbsp;(hardware demo)</div>
+            <div><span class="cap-badge">Sim wrist +10 kg: 65% SR
+                &nbsp;vs.&nbsp; 50% baseline</span></div>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 14 — REAL: 20 KG DESCENDING   [2:08–2:17]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 15 — REAL: 20 KG DESCENDING   [2:18–2:27]
 ══════════════════════════════════════════════════ -->
-<section
-  data-autoslide="9000"
-  data-background-video="./static/videos/down_stair_traversal.mp4"
-  data-background-video-muted="true"
-  data-background-video-loop="true"
-  data-background-size="cover"
-  data-background-color="#000">
-  <div class="act-tag">Act 4 — Real Robot</div>
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);
-              text-align:center;pointer-events:none;">
-    <div class="big-num">20 kg</div>
-    <div style="font-size:0.6em;color:rgba(255,255,255,0.7);margin-top:0.3em;font-weight:600;">
-      Full expedition backpack
-    </div>
-  </div>
-  <div class="overlay-caption">
-    <div class="cap-label">Real Robot &nbsp;·&nbsp; Zero-shot</div>
-    <div class="cap-main">Rear-mounted backpack, 20 kg &nbsp;·&nbsp; descending stairs</div>
-  </div>
-</section>
+        <section
+          data-autoslide="9000"
+          data-background-video="./static/videos/down_stair_traversal.mp4"
+          data-background-video-muted="true"
+          data-background-video-loop="true"
+          data-background-size="cover"
+          data-background-color="#000">
+          <div class="act-tag">Act 4 — Real Robot</div>
+          <!-- flex column: spacer pushes big-num to upper-center, caption sits at bottom -->
+          <div
+            style="position:absolute;inset:0;display:flex;flex-direction:column;
+                      align-items:left;justify-content:flex-start;pointer-events:none;">
+            <div style="flex:1;display:flex;flex-direction:column;
+                        align-items:center;justify-content:center;
+                        padding-bottom:5em;">
+              <div class="big-num">20 kg</div>
+              <div style="font-size:0.6em;color:rgba(255,255,255,0.7);
+                          margin-top:0.3em;font-weight:600;">
+                Full expedition backpack
+              </div>
+            </div>
+            <div class="overlay-caption">
+              <div class="cap-label">Real Robot &nbsp;·&nbsp; Zero-shot</div>
+              <div class="cap-main">Rear-mounted backpack, 20 kg &nbsp;·&nbsp;
+                descending stairs</div>
+            </div>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 15 — REAL: 20 KG ASCENDING   [2:17–2:22]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 16 — REAL: 20 KG ASCENDING   [2:27–2:32]
 ══════════════════════════════════════════════════ -->
-<section
-  data-autoslide="5000"
-  data-background-video="./static/videos/up_stair_traversal.mp4"
-  data-background-video-muted="true"
-  data-background-video-loop="true"
-  data-background-size="cover"
-  data-background-color="#000">
-  <div class="act-tag">Act 4 — Real Robot</div>
-  <div class="overlay-caption">
-    <div class="cap-label">Real Robot &nbsp;·&nbsp; Zero-shot</div>
-    <div class="cap-main">20 kg backpack &nbsp;·&nbsp; ascending stairs</div>
-  </div>
-</section>
+        <section
+          data-autoslide="5000"
+          data-background-video="./static/videos/up_stair_traversal.mp4"
+          data-background-video-muted="true"
+          data-background-video-loop="true"
+          data-background-size="cover"
+          data-background-color="#000">
+          <div class="act-tag">Act 4 — Real Robot</div>
+          <div class="overlay-caption">
+            <div class="cap-label">Real Robot &nbsp;·&nbsp; Zero-shot</div>
+            <div class="cap-main">20 kg backpack &nbsp;·&nbsp; ascending
+              stairs</div>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 16 — TERRAIN TRAVERSAL ABLATION   [2:22–2:33]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 17 — TERRAIN TRAVERSAL: SUCCESS RATE   [2:46–2:59]
 ══════════════════════════════════════════════════ -->
-<section data-autoslide="11000" data-background-color="#ffffff">
-  <div class="act-tag dark">Act 5 — Results</div>
-  <div class="slide-title">Terrain Traversal Ablation</div>
-  <hr class="rule">
-  <div class="two-col" style="gap:0.8em;">
-    <div class="col" style="display:flex;flex-direction:column;gap:0.4em;">
-      <div style="text-align:center;">
-        <img src="./static/images/ablation_normal.png"
-             alt="Standard terrain ablation" style="width:100%;">
-        <div class="fig-cap">Standard terrain (0.05–0.20 m risers)</div>
-      </div>
-      <div style="text-align:center;">
-        <img src="./static/images/ablation_hard_terrain.png"
-             alt="Hard terrain ablation" style="width:100%;">
-        <div class="fig-cap">Hard terrain, OOD (0.20–0.30 m risers)</div>
-      </div>
-    </div>
-    <div class="col" style="display:flex;flex-direction:column;gap:0.45em;">
-      <div class="stat-row" style="flex-wrap:wrap;justify-content:flex-start;gap:0.45em;">
-        <div class="stat-box" style="min-width:85px;"><div class="val">70%</div><div class="lbl">standard SR<br>(ours)</div></div>
-        <div class="stat-box" style="min-width:85px;"><div class="val">30%</div><div class="lbl">SR<sub>hard</sub><br>OOD risers</div></div>
-        <div class="stat-box" style="min-width:85px;"><div class="val">+13 pp</div><div class="lbl">vs. TACT-only</div></div>
-        <div class="stat-box" style="min-width:85px;"><div class="val">2.8×</div><div class="lbl">foot-target<br>without TACT</div></div>
-      </div>
-      <div style="display:flex;gap:0.4em;">
-        <div style="flex:1;text-align:center;">
-          <img src="./static/images/sr_speed.png" alt="Speed SR" style="width:100%;">
-          <div class="fig-cap">SR vs. speed — gap is speed-invariant</div>
-        </div>
-        <div style="flex:1;text-align:center;">
-          <img src="./static/images/foot_target_dist.png" alt="Foot-target distance" style="width:100%;">
-          <div class="fig-cap">Foot-target distance during training</div>
-        </div>
-      </div>
-      <div style="font-size:0.53em;color:#555;background:#f5f5f5;
-                  border-left:3px solid var(--indigo);border-radius:0 6px 6px 0;
-                  padding:0.35em 0.55em;line-height:1.5;">
-        Adaptive gait alone falls <em>below</em> the blind baseline on hard terrain (18% vs. 19%) —
-        re-timing without terrain guidance is actively harmful at kinematic limits.
-      </div>
-    </div>
-  </div>
-</section>
+        <section data-autoslide="13000" data-background-color="#ffffff">
+          <div class="act-tag dark">Act 5 — Results</div>
+          <div class="slide-title">Terrain Traversal: Success Rate</div>
+          <hr class="rule">
+          <div
+            style="display:flex;flex-direction:column;align-items:center;gap:0.35em;">
+            <div style="text-align:center;width:72%;">
+              <img src="./static/images/ablation_normal.png"
+                alt="Standard terrain ablation" style="width:100%;">
+              <div class="fig-cap">Standard terrain (0.05–0.20 m risers)</div>
+            </div>
+            <div style="text-align:center;width:72%;">
+              <img src="./static/images/ablation_hard_terrain.png"
+                alt="Hard terrain ablation" style="width:100%;">
+              <div class="fig-cap">Hard terrain, OOD (0.20–0.30 m risers)</div>
+            </div>
+            <div
+              style="display:flex;gap:0.6em;align-items:center;width:72%;margin-top:0.3em;">
+              <div class="stat-row" style="flex-shrink:0;gap:0.5em;margin:0;">
+                <div class="stat-box" style="min-width:80px;"><div
+                    class="val">70%</div><div class="lbl">standard
+                    SR<br>(ours)</div></div>
+                <div class="stat-box" style="min-width:80px;"><div
+                    class="val">+13 pp</div><div class="lbl">vs.
+                    TACT-only</div></div>
+                <div class="stat-box" style="min-width:80px;"><div
+                    class="val">+17 pp</div><div class="lbl">vs.
+                    adaptive<br>gait only</div></div>
+              </div>
+              <div class="res-item"
+                style="font-size:0.58em;margin-bottom:0;flex:1;">
+                On hard terrain, adaptive gait alone drops to
+                <strong>18%</strong> —
+                below the blind baseline (19%). Re-timing without foothold
+                guidance is <em>actively harmful</em> at kinematic limits.
+              </div>
+            </div>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 17 — PAYLOAD GENERALIZATION   [2:33–2:44]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 18 — TERRAIN TRAVERSAL: FOOTHOLD QUALITY   [2:59–3:13]
 ══════════════════════════════════════════════════ -->
-<section data-autoslide="11000" data-background-color="#ffffff">
-  <div class="act-tag dark">Act 5 — Results</div>
-  <div class="slide-title">Payload Generalization — Zero-Shot</div>
-  <hr class="rule">
-  <div class="two-col" style="gap:0.8em;align-items: center;font-size: 1.3em;">
-    <div class="col" style="text-align:center;">
-      <img src="./static/images/payload_w_terrain.png"
-           alt="SR and power vs payload"
-           style="width:100%;max-height:480px;object-fit:contain;">
-      <div class="fig-cap">SR (%) and mean power (W) vs. payload condition on stairs · 100 episodes each</div>
-    </div>
-    <div class="col" style="display:flex;flex-direction:column;gap:0.4em;">
-      <div class="res-item">
-        <strong>Pelvis +15 kg</strong> — moderate centered load<br>
-        <b>50%</b> vs. 38% SR &nbsp;·&nbsp; 247 vs. 277 W<br>
-        Compliance absorbs the downward wrench.
-      </div>
-      <div class="res-item">
-        <strong>Pelvis +20 kg</strong> — near distribution boundary<br>
-        ~37% vs. ~35% SR (parity) &nbsp;·&nbsp; 293 vs. 320 W<br>
-        −27 W retained: partial compliance preserved.
-      </div>
-      <div class="res-item green">
-        <strong>Wrist +10 kg ✦ largest margin</strong><br>
-        <b>65%</b> vs. 50% SR &nbsp;·&nbsp; 223 vs. 259 W<br>
-        Arm-extended wrench samples target moment-dominated loads directly.
-      </div>
-    </div>
-  </div>
-</section>
+        <section data-autoslide="14000" data-background-color="#ffffff">
+          <div class="act-tag dark">Act 5 — Results</div>
+          <div class="slide-title">Terrain Traversal: Foothold Quality</div>
+          <hr class="rule">
+          <div class="two-col" style="gap:1em;align-items:flex-start;">
+            <div class="col" style="text-align:center;">
+              <img src="./static/images/sr_speed.png" alt="SR vs. speed"
+                style="width:100%;">
+              <div class="fig-cap">SR vs. commanded speed — gap is
+                speed-invariant</div>
+            </div>
+            <div class="col" style="text-align:center;">
+              <img src="./static/images/foot_target_dist.png"
+                alt="Foot-target distance" style="width:100%;">
+              <div class="fig-cap">Foot-target distance during training</div>
+            </div>
+          </div>
+          <div
+            style="display:flex;gap:0.7em;align-items:center;margin-top:0.6em;">
+            <div class="stat-box" style="min-width:80px;flex-shrink:0;">
+              <div class="val">2.8×</div>
+              <div class="lbl">foot-target<br>without TACT</div>
+            </div>
+            <div class="res-item" style="font-size:0.58em;margin-bottom:0;">
+              The success rate gap is <strong>speed-invariant</strong> from 0.5
+              to 1.0 m/s.
+              Without terrain guidance, foot-target distance during training is
+              2.8×
+              larger. The terrain cost signal is the operative variable.
+            </div>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 18 — LIMITATIONS   [2:44–2:50]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 19 — PAYLOAD GENERALIZATION   [3:13–3:24]
 ══════════════════════════════════════════════════ -->
-<section data-autoslide="6000" data-background-color="#f5f5f5">
-  <div class="act-tag dark">Act 5 — Results</div>
-  <div class="slide-title">Limitations</div>
-  <hr class="rule">
-  <ul style="font-size:1.3em;color:#444;line-height:1.8;margin:0.8em auto;">
-    <li>Quantitative ablations in <strong>simulation only</strong> — hardware demos are qualitative</li>
-    <li>Hard-terrain SR reaches only <strong>30%</strong> on risers 0.22–0.28 m — tall stairs remain challenging</li>
-    <li>Compliance benefit saturates at <strong>~20 kg</strong> centered load (near training distribution boundary)</li>
-    <li>Terrain-cost weights are <strong>hand-tuned</strong>; forward-facing depth camera only — no lateral coverage</li>
-    <li>Tangent-guided orientation degrades on slopes &gt;~15° (arc tangent ≠ surface normal)</li>
-  </ul>
-  <div style="text-align:center;margin-top:0.8em;font-size:0.7em;color:#999;font-style:italic;">
-    Next: quantitative real-world evaluation &nbsp;·&nbsp; terrain × payload coupling study
-  </div>
-</section>
+        <section data-autoslide="11000" data-background-color="#ffffff">
+          <div class="act-tag dark">Act 5 — Results</div>
+          <div class="slide-title">Payload Generalization — Zero-Shot</div>
+          <hr class="rule">
+          <div class="two-col"
+            style="gap:0.8em;align-items: center;font-size: 1.6em;">
+            <div class="col" style="text-align:center;">
+              <img src="./static/images/payload_w_terrain.png"
+                alt="SR and power vs payload"
+                style="width:100%;max-height:480px;object-fit:contain;">
+              <div class="fig-cap">SR (%) and mean power (W) vs. payload
+                condition on stairs</div>
+            </div>
+            <div class="col"
+              style="display:flex;flex-direction:column;gap:0.4em;">
+              <div class="res-item">
+                <strong>Pelvis +15 kg</strong> — moderate centered load<br>
+                <b>50%</b> vs. 38% SR &nbsp;·&nbsp; 247 vs. 277 W<br>
+                Compliance absorbs the downward wrench.
+              </div>
+              <div class="res-item">
+                <strong>Pelvis +20 kg</strong> — near distribution boundary<br>
+                ~37% vs. ~35% SR (parity) &nbsp;·&nbsp; 293 vs. 320 W<br>
+                −27 W retained: partial compliance preserved.
+              </div>
+              <div class="res-item green">
+                <strong>Wrist +10 kg ✦ largest margin</strong><br>
+                <b>65%</b> vs. 50% SR &nbsp;·&nbsp; 223 vs. 259 W<br>
+                Arm-extended wrench samples target moment-dominated loads
+                directly.
+              </div>
+            </div>
+          </div>
+        </section>
 
-<!-- ══════════════════════════════════════════════════
-  SLIDE 19 — CONCLUSION / END CARD   [2:50–3:00]
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 20 — LIMITATIONS   [3:24–3:32]
 ══════════════════════════════════════════════════ -->
-<section
-  data-autoslide="10000"
-  data-background-image="./static/images/teaser_vinfast1.png"
-  data-background-size="cover"
-  data-background-position="center"
-  data-background-opacity="0.28"
-  data-background-color="#0a0a1a">
-  <div style="text-align:center;padding:1em 0;">
-    <div style="font-size:2.4em;font-weight:900;color:#fff;letter-spacing:0.05em;margin-bottom:0.2em;">
-      TACT<span style="color:var(--indigo);">ful</span>
-    </div>
-    <div style="font-size:0.68em;color:rgba(255,255,255,0.7);margin-bottom:0.7em;line-height:1.6;">
-      One training run &nbsp;·&nbsp; Structured terrain &nbsp;·&nbsp; Heavy payload &nbsp;·&nbsp; Real robot
-    </div>
-    <div style="margin-bottom:0.75em;">
-      <span class="pill light">Multi-Channel Terrain Cost</span>
-      <span class="pill light">Compliance Without Force Sensors</span>
-      <span class="pill light">Zero-Shot Sim-to-Real</span>
-    </div>
-    <div style="display:flex;justify-content:center;gap:1em;margin:0.6em 0 0.8em;flex-wrap:wrap;">
-      <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:0.5em 0.9em;
+        <section data-autoslide="8000" data-background-color="#f5f5f5">
+          <div class="act-tag dark">Act 5 — Results</div>
+          <div class="slide-title">Limitations</div>
+          <hr class="rule">
+          <ul
+            style="font-size:0.95em;color:#444;line-height:1.8;margin:0.8em auto;">
+            <li>Quantitative ablations in <strong>simulation only</strong> —
+              hardware results are qualitative; absolute real-world SR
+              uncharacterised</li>
+            <li>Hard-terrain SR only <strong>30%</strong> on risers 0.22–0.28 m
+              —
+              insufficient for reliable deployment on tall staircases</li>
+            <li>Compliance ceiling <strong>~20 kg</strong> centered; lateral,
+              distributed &amp; swinging loads fall outside the sampled wrench
+              space</li>
+            <li>DCM planner requires accurate elevation-map registration —
+              <strong>no fallback under localization drift</strong>; forward
+              camera only</li>
+            <li>Tangent-guided orientation fails on slopes &gt;~15° — arc
+              tangent
+              ≠ surface normal → toe/heel contact, narrowed friction cone</li>
+          </ul>
+          <div
+            style="text-align:center;margin-top:0.8em;font-size:0.7em;color:#999;font-style:italic;">
+            Next: quantitative real-world evaluation &nbsp;·&nbsp; terrain ×
+            payload coupling study
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════
+  SLIDE 21 — CONCLUSION / END CARD   [3:32–3:42]
+══════════════════════════════════════════════════ -->
+        <section
+          data-autoslide="10000"
+          data-background-image="./static/images/teaser_vf1.png"
+          data-background-size="cover"
+          data-background-position="center"
+          data-background-opacity="0.28"
+          data-background-color="#0a0a1a">
+          <div style="text-align:center;padding:1em 0;">
+            <div style="font-family:'Audiowide','Inter',sans-serif;
+                        font-size:2.4em;font-weight:700;letter-spacing:0.08em;
+                        color:#fff;line-height:1;
+                        text-shadow:0 4px 30px rgba(0,0,0,0.4);margin-bottom:0.2em;">
+              TACT<span style="font-family:'Inter',sans-serif;font-weight:400;
+                               font-style:italic;letter-spacing:0.02em;opacity:0.9;">ful</span>
+            </div>
+            <div
+              style="font-size:0.95em;color:rgba(255,255,255,0.7);margin-bottom:0.7em;line-height:1.6;">
+              Standard PPO &nbsp;·&nbsp; Zero-shot sim-to-real &nbsp;·&nbsp;
+              Service humanoid
+            </div>
+            <div style="margin-bottom:0.75em;">
+              <span class="pill light">Multi-Channel Terrain Cost</span>
+              <span class="pill light">Compliance Without Force Sensors</span>
+              <span class="pill light">Zero-Shot Sim-to-Real</span>
+            </div>
+            <div
+              style="display:flex;justify-content:center;gap:1em;margin:0.6em 0 0.8em;flex-wrap:wrap;">
+              <div
+                style="background:rgba(255,255,255,0.08);border-radius:8px;padding:0.5em 0.9em;
                   font-size:0.56em;color:rgba(255,255,255,0.85);text-align:center;">
-        <div style="font-size:1.5em;font-weight:900;color:#fff;">70%</div>
-        standard SR
-      </div>
-      <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:0.5em 0.9em;
+                <div
+                  style="font-size:1.5em;font-weight:900;color:#fff;">70%</div>
+                standard SR
+              </div>
+              <div
+                style="background:rgba(255,255,255,0.08);border-radius:8px;padding:0.5em 0.9em;
                   font-size:0.56em;color:rgba(255,255,255,0.85);text-align:center;">
-        <div style="font-size:1.5em;font-weight:900;color:#fff;">65%</div>
-        wrist SR vs. 50%
-      </div>
-      <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:0.5em 0.9em;
+                <div
+                  style="font-size:1.5em;font-weight:900;color:#fff;">65%</div>
+                wrist SR vs. 50%
+              </div>
+              <div
+                style="background:rgba(255,255,255,0.08);border-radius:8px;padding:0.5em 0.9em;
                   font-size:0.56em;color:rgba(255,255,255,0.85);text-align:center;">
-        <div style="font-size:1.5em;font-weight:900;color:#4ade80;">20 kg</div>
-        real demo
-      </div>
-      <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:0.5em 0.9em;
+                <div style="font-size:1.5em;font-weight:900;color:#4ade80;">20
+                  kg</div>
+                real demo
+              </div>
+              <div
+                style="background:rgba(255,255,255,0.08);border-radius:8px;padding:0.5em 0.9em;
                   font-size:0.56em;color:rgba(255,255,255,0.85);text-align:center;">
-        <div style="font-size:1.5em;font-weight:900;color:#fff;">0-shot</div>
-        sim-to-real
-      </div>
-    </div>
-    <div style="font-size:0.5em;color:rgba(255,255,255,0.35);margin-top:0.5em;
+                <div
+                  style="font-size:1.5em;font-weight:900;color:#fff;">0-shot</div>
+                sim-to-real
+              </div>
+            </div>
+            <div
+              style="font-size:0.5em;color:rgba(255,255,255,0.35);margin-top:0.5em;
                 font-family:'Courier New',monospace;letter-spacing:0.04em;">
-      fai-rl-tech.github.io/tact-locomotion.github.io
-    </div>
-  </div>
-</section>
+              fai-rl-tech.github.io/tact-locomotion.github.io
+            </div>
+          </div>
+        </section>
 
-</div><!-- /.slides -->
-</div><!-- /.reveal -->
+      </div><!-- /.slides -->
+    </div><!-- /.reveal -->
 
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
-<script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+    <script>
   Reveal.initialize({
     hash: true,
     slideNumber: false,
@@ -870,5 +1144,5 @@
     plugins: [ RevealMath.MathJax3 ]
   });
 </script>
-</body>
+  </body>
 </html>

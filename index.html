@@ -18,7 +18,7 @@
       content="TACT-ful: Multi-Channel Terrain Affordance and Compliance Training for Payload-Robust Perceptive Humanoid Locomotion">
     <meta property="og:description"
       content="TACT-ful: Multi-channel terrain cost for DCM foothold planning and RL reward shaping, with lower-body compliance training for zero-shot payload generalization on service humanoids.">
-    <meta property="og:image" content="./static/images/teaser_vinfast_14.png">
+    <meta property="og:image" content="./static/images/teaser_vf_14.png">
     <meta property="og:type" content="website">
 
     <link rel="icon" href="./static/images/icon.png">
@@ -145,13 +145,13 @@
 
       <!-- Desktop navbar -->
       <nav class="hero-navbar">
-        <a href="./static/paper.pdf" target="_blank">
+        <a href="./static/TACT-ful_Full-paper.pdf" target="_blank">
           <i class="fas fa-file-pdf"></i> Paper
         </a>
         <a href="#" title="arXiv - coming soon">
           <i class="ai ai-arxiv"></i> arXiv
         </a>
-        <a href="#" title="Video - coming soon">
+        <a href="./static/videos/TACT-ful_Video.mp4" target="_blank">
           <i class="fab fa-youtube"></i> Video
         </a>
         <a href="#" target="_blank">
@@ -174,14 +174,15 @@
 
         <!-- Mobile link buttons -->
         <div class="link-buttons" style="margin-top:0.5rem;">
-          <a class="link-btn btn-dark" href="./static/paper.pdf"
+          <a class="link-btn btn-dark" href="./static/TACT-ful_Full-paper.pdf"
             target="_blank">
             <i class="fas fa-file-pdf"></i> Paper
           </a>
           <a class="link-btn btn-dark" href="#">
             <i class="ai ai-arxiv"></i> arXiv
           </a>
-          <a class="link-btn btn-dark" href="#">
+          <a class="link-btn btn-dark" href="./static/videos/TACT-ful_Video.mp4"
+            target="_blank">
             <i class="fab fa-youtube"></i> Video
           </a>
           <a class="link-btn btn-dark" href="#" target="_blank">
@@ -209,14 +210,15 @@
         </p>
 
         <div class="link-buttons">
-          <a class="link-btn btn-dark" href="./static/paper.pdf"
+          <a class="link-btn btn-dark" href="./static/TACT-ful_Full-paper.pdf"
             target="_blank">
             <i class="fas fa-file-pdf"></i> PDF
           </a>
           <a class="link-btn btn-dark" href="#">
             <i class="ai ai-arxiv"></i> arXiv
           </a>
-          <a class="link-btn btn-dark" href="#">
+          <a class="link-btn btn-dark" href="./static/videos/TACT-ful_Video.mp4"
+            target="_blank">
             <i class="fab fa-youtube"></i> Video
           </a>
           <a class="link-btn btn-outline" href="#" target="_blank">
@@ -230,25 +232,25 @@
      TEASER GALLERY
 ══════════════════════════════════════════════════ -->
     <section class="section-pad" id="teaser" style="padding-top:1.5rem;">
-      <div style="max-width:1100px;margin:0 auto;padding:0 1rem;">
+      <div style="max-width:860px;margin:0 auto;padding:0 1rem;">
 
         <!-- Row 1: full-width banner -->
-        <img class="teaser-banner" src="./static/images/teaser_vinfast1.png"
+        <img class="teaser-banner" src="./static/images/teaser_vf1.png"
           alt="Service humanoid traversing stairs with payload">
 
         <!-- Row 2: two equal real-robot thumbnails -->
-        <div class="teaser-strip">
-          <figure>
-            <img src="./static/images/teaser_vinfast2.png"
-              alt="Real robot stair traversal - front view">
-            <!--<figcaption>Real robot · stair traversal</figcaption>-->
-          </figure>
-          <figure>
-            <img src="./static/images/teaser_vinfast3.png"
-              alt="Real robot stair traversal - side view">
-            <!--<figcaption>Real robot · with payload</figcaption>-->
-          </figure>
-        </div>
+        <!-- <div class="teaser-strip"> -->
+        <!-- <figure> -->
+        <!-- <img src="./static/images/teaser_vf2.png" -->
+        <!-- alt="Real robot stair traversal - front view"> -->
+        <!-- <figcaption>Real robot · stair traversal</figcaption> -->
+        <!-- </figure> -->
+        <!-- <figure> -->
+        <!-- <img src="./static/images/teaser_vf3.png" -->
+        <!-- alt="Real robot stair traversal - side view"> -->
+        <!--<figcaption>Real robot · with payload</figcaption>-->
+        <!-- </figure> -->
+        <!-- </div> -->
 
         <!-- Row 3: teaser_2 centered standalone -->
         <div class="teaser-solo">
@@ -295,50 +297,39 @@
           <div class="tldr-point">
             <div class="tldr-num">1</div>
             <div class="tldr-text">
-              <strong>Multi-channel terrain cost:</strong>
-              Flatness ($Q$), steepness ($E$), and velocity-aware height
-              feasibility ($M$) simultaneously
-              drive a GPU-parallel DCM foothold planner and shape dense per-step
-              affordance rewards for the RL policy.
-              A Bézier swing trajectory with adaptive apex bias extends foothold
-              tracking to sole orientation,
-              guiding the foot through riser crossings and tread landings.
+              <strong>Terrain cost ($Q$, $E$, $M$) + Bézier swing</strong> drive
+              the DCM foothold planner, shape RL rewards, and orient the sole at
+              riser crossings.
             </div>
           </div>
           <div class="tldr-point">
             <div class="tldr-num">2</div>
             <div class="tldr-text">
-              <strong>Lower-body compliance without force sensing:</strong>
-              A virtual spring-damper injected at a sampled load attachment
-              point generates physically consistent
-              force and moment; wrench-aware compliance targets teach the policy
-              to yield to payload perturbations
-              zero-shot — up to ~15 kg centered load and for moment-dominated
-              wrist loads.
+              <strong>Virtual wrench injection</strong> at sampled body points
+              trains payload compliance without a force sensor or payload mass
+              in simulation.
             </div>
           </div>
           <div class="tldr-point">
             <div class="tldr-num">3</div>
             <div class="tldr-text">
-              <strong>Sim-to-real, zero-shot deployment:</strong>
-              The system is deployed directly from simulation on a service
-              humanoid with configuration changes only,
-              reaching 1.0 m/s on stairs with 0.20 m risers and carrying up to
-              20 kg payload
-              in qualitative hardware demonstrations.
+              <strong>Zero-shot sim-to-real</strong> on a service humanoid: 1.0
+              m/s on 0.20 m risers, up to 20 kg payload, no hardware
+              fine-tuning.
             </div>
           </div>
         </div>
 
         <div class="pres-wrapper">
-          <iframe src="./presentation.html"
-            title="TACT-ful — slide deck overview"
+          <iframe src="./slides_video.html"
+            title="TACT-ful — video presentation"
             allow="fullscreen"
             loading="lazy"></iframe>
         </div>
         <p class="pres-caption">
-          11-slide overview — arrow keys or click to navigate &nbsp;·&nbsp;
-          <a href="./presentation.html" target="_blank">Open full page →</a>
+          21-slide video presentation — arrow keys or click to navigate
+          &nbsp;·&nbsp;
+          <a href="./slides_video.html" target="_blank">Open full page →</a>
         </p>
       </div>
     </section>
@@ -670,6 +661,18 @@
             style="font-size:1.25rem;font-weight:700;color:#1a237e;margin-bottom:0.8rem;">
             Lower Body Compliance via Cosine-Power-Weighted Force Injection
           </h3>
+          <div style="text-align:center;max-width:560px;margin:1.5rem auto 0;">
+            <img src="./static/images/body_point_cloud.png"
+              alt="Body attachment point cloud for wrench sampling"
+              style="width:100%;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.13);">
+          </div>
+          <p class="fig-caption mt-2">
+            <strong>Figure 4.</strong> Candidate load attachment points
+            $\mathbf{p}_\text{load}$ sampled uniformly from the robot body
+            surface. Body-attached samples cover centred loads; arm-extended
+            samples cover large moment arms. These positions define the
+            virtual spring-damper anchor during compliance training.
+          </p>
           <p style="font-size:0.9rem;line-height:1.8;color:#444;">
             A payload exerts a wrench
             $\mathbf{W}=(\mathbf{F},\boldsymbol{\tau})$ on the robot, where
@@ -770,8 +773,8 @@
               <div class="stat-label">on stairs with<br>0.20 m risers</div>
             </div>
             <div class="stat-item">
-              <div class="stat-value">0-20 kg</div>
-              <div class="stat-label">waist payload<br>zero-shot</div>
+              <div class="stat-value">~15 kg</div>
+              <div class="stat-label">centered load<br>zero-shot</div>
             </div>
             <div class="stat-item">
               <div class="stat-value">12 DOF</div>
@@ -836,7 +839,7 @@
           </figure>
         </div>
         <p class="fig-caption mt-1">
-          <strong>Figure 4.</strong> Terrain traversal ablation on
+          <strong>Figure 5.</strong> Terrain traversal ablation on
           <strong>standard terrain</strong> (top)
           and <strong>hard terrain</strong> - out-of-distribution risers
           0.20-0.30&thinsp;m (bottom).
@@ -929,7 +932,7 @@
           </figure>
         </div>
         <p class="fig-caption mt-1">
-          <strong>Figure 5.</strong>
+          <strong>Figure 6.</strong>
           (a)&thinsp;Speed-conditioned SR; (b)&thinsp;foot-target distance
           across ablation variants;
           (c)&thinsp;SR (%) and mean power (W) under payload.
@@ -949,147 +952,119 @@
         <h2 class="section-title">Video Results</h2>
         <hr
           style="border:none;border-top:3px solid #3949ab;width:60px;margin:0.5rem auto 0.6rem;">
-        <p class="section-subtitle">Real robot and simulation for each task
-          scenario. Videos coming soon.</p>
+        <p class="section-subtitle">Simulation (top) and real robot (bottom)
+          demonstrations, zero-shot from simulation.</p>
 
-        <div class="video-grid">
+        <!-- ── Simulation videos (3 × 2) ── -->
+        <h3 style="font-size:1.05rem;font-weight:700;color:#1a237e;
+                   text-transform:uppercase;letter-spacing:0.06em;
+                   margin:1.4rem 0 0.75rem;border-left:3px solid #3949ab;
+                   padding-left:0.6rem;">Simulation</h3>
+        <div
+          style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;margin-bottom:2.2rem;">
 
-          <!-- Column headers -->
-          <div class="video-col-header">Real Robot</div>
-          <div class="video-col-header">Simulation</div>
-
-          <div class="video-row-header">
-            <span class="task-num">1</span>
-            <span class="task-title">Stair Traversal</span>
-            <span class="task-desc">- risers up to 0.20 m, 1.0 m/s</span>
-          </div>
-          <div class="video-ph">
-            <video autoplay muted loop playsinline
-              src="./static/videos/stair_traversal.mp4"></video>
-            <!-- <div class="video-ph-overlay"><i class="fas fa-video"></i><span>Coming Soon</span></div> -->
-          </div>
-          <div class="video-ph">
-            <div class="video-ph-overlay"><i
-                class="fas fa-video"></i><span>Coming Soon</span></div>
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/vr_m3_1_nopayload.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Baseline · no
+              payload</p>
           </div>
 
-          <div class="video-row-divider"></div>
-
-          <div class="video-row-header">
-            <span class="task-num">2</span>
-            <span class="task-title">Stair Ascent with Wrist Payload</span>
-            <span class="task-desc">- moment-dominated wrist payload, 7
-              kg</span>
-          </div>
-          <div class="video-ph">
-            <video autoplay muted loop playsinline
-              src="./static/videos/up_stair_traversal_7kg.mp4"></video>
-          </div>
-          <div class="video-ph">
-            <div class="video-ph-overlay"><i
-                class="fas fa-video"></i><span>Coming Soon</span></div>
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/vr_m3_1_front_backpack.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Front-mounted backpack
+              · 5 kg</p>
           </div>
 
-          <div class="video-row-header">
-            <span class="task-num">3</span>
-            <span class="task-title">Stair Descent with Backpack</span>
-            <span class="task-desc">- 20 kg backpack, zero-shot</span>
-          </div>
-          <div class="video-ph">
-            <video autoplay muted loop playsinline
-              src="./static/videos/down_stair_traversal.mp4"></video>
-          </div>
-          <div class="video-ph">
-            <div class="video-ph-overlay"><i
-                class="fas fa-video"></i><span>Coming Soon</span></div>
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/vr_m3_1_backpack.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Rear-mounted backpack
+              · 5 kg</p>
           </div>
 
-          <div class="video-row-header">
-            <span class="task-num">4</span>
-            <span class="task-title">Stair Ascent with Backpack</span>
-            <span class="task-desc">- 20 kg backpack, zero-shot</span>
-          </div>
-          <div class="video-ph">
-            <video autoplay muted loop playsinline
-              src="./static/videos/up_stair_traversal.mp4"></video>
-          </div>
-          <div class="video-ph">
-            <div class="video-ph-overlay"><i
-                class="fas fa-video"></i><span>Coming Soon</span></div>
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/vr_m3_1_both_backpack.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Front + rear backpacks
+              · 10 kg</p>
           </div>
 
-          <div class="video-row-header">
-            <span class="task-num">5</span>
-            <span class="task-title">Payload Carrying</span>
-            <span class="task-desc">- 0–20 kg centered load, zero-shot</span>
-          </div>
-          <div class="video-ph">
-            <div class="video-ph-overlay"><i
-                class="fas fa-video"></i><span>Coming Soon</span></div>
-          </div>
-          <div class="video-ph">
-            <div class="video-ph-overlay"><i
-                class="fas fa-video"></i><span>Coming Soon</span></div>
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/vr_m3_1_basket.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Basket · 5 × 1 kg
+              blocks</p>
           </div>
 
-          <div class="video-row-divider"></div>
-
-          <div class="video-row-header">
-            <span class="task-num">6</span>
-            <span class="task-title">Compliance &amp; Disturbance
-              Rejection</span>
-            <span class="task-desc">- virtual wrench injection, push
-              recovery</span>
-          </div>
-          <div class="video-ph">
-            <div class="video-ph-overlay"><i
-                class="fas fa-video"></i><span>Coming Soon</span></div>
-          </div>
-          <div class="video-ph">
-            <div class="video-ph-overlay"><i
-                class="fas fa-video"></i><span>Coming Soon</span></div>
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                style="object-position:right center;"
+                src="./static/videos/vr_m3_1_vf.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Car door · ~5 kg ·
+              largest moment arm</p>
           </div>
 
-          <div class="video-row-divider"></div>
+        </div>
 
-          <div class="video-row-header">
-            <span class="task-num">7</span>
-            <span class="task-title">Gap &amp; Slope Generalization</span>
-            <span class="task-desc">- held-out terrain: gaps and slopes</span>
-          </div>
-          <div class="video-ph">
-            <div class="video-ph-overlay"><i
-                class="fas fa-video"></i><span>Coming Soon</span></div>
-          </div>
-          <div class="video-ph">
-            <div class="video-ph-overlay"><i
-                class="fas fa-video"></i><span>Coming Soon</span></div>
-          </div>
+        <!-- ── Real robot videos (2 × 2) ── -->
+        <h3 style="font-size:1.05rem;font-weight:700;color:#1a237e;
+                   text-transform:uppercase;letter-spacing:0.06em;
+                   margin:0 0 0.75rem;border-left:3px solid #3949ab;
+                   padding-left:0.6rem;">Real Robot</h3>
+        <div
+          style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;">
 
-          <div class="video-row-divider"></div>
-
-          <div class="video-row-header">
-            <span class="task-num">8</span>
-            <span class="task-title">Foothold Planning</span>
-            <span class="task-desc">- DCM planner with terrain cost
-              visualization</span>
-          </div>
-          <div class="video-ph">
-            <div class="video-ph-overlay"><i
-                class="fas fa-video"></i><span>Coming Soon</span></div>
-          </div>
-          <div class="video-ph">
-            <div class="video-ph-overlay"><i
-                class="fas fa-video"></i><span>Coming Soon</span></div>
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/stair_traversal.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Stair traversal ·
+              risers up to 0.20 m · 1.0 m/s</p>
           </div>
 
-        </div><!-- /.video-grid -->
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/up_stair_traversal_7kg.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Stair ascent ·
+              wrist-mounted payload · 7 kg</p>
+          </div>
 
-        <!--<p style="font-size:0.8rem;color:#aaa;text-align:center;margin-top:1.2rem;">
-        To add a video: place the file in <code>static/videos/</code> and replace the comment inside
-        the matching <code>.video-ph</code> with
-        <code>&lt;video autoplay muted loop playsinline src="./static/videos/your_file.mp4"&gt;&lt;/video&gt;</code>.
-      </p>-->
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/down_stair_traversal.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Stair descent ·
+              rear-mounted backpack · 20 kg</p>
+          </div>
+
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/up_stair_traversal.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Stair ascent ·
+              rear-mounted backpack · 20 kg</p>
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -1104,12 +1079,13 @@
         <div class="bibtex-block">
           <button class="copy-btn" id="copy-bibtex"
             title="Copy BibTeX">Copy</button>
-          <pre id="bibtex-text">@inproceedings{anon2026mctac,
-  title     = {Multi-Channel Terrain Affordance and Compliance Training for
-               Payload-Robust Perceptive Humanoid Locomotion},
-  author    = {Anonymous},
-  booktitle = {Conference on Robot Learning (CoRL)},
+          <pre id="bibtex-text">@inproceedings{anonymous2026tactful,
+  title     = {TACT-ful: Multi-Channel Terrain Affordance and Compliance
+               Training for Payload-Robust Perceptive Humanoid Locomotion},
+  author    = {Anonymous Authors},
+  booktitle = {Conference on Robot Learning},
   year      = {2026},
+  note      = {Under Review},
 }</pre>
         </div>
       </div>

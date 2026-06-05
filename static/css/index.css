@@ -34,7 +34,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: url('../images/teaser_vinfast_14.png') center center / cover no-repeat fixed;
+  background: url('../images/teaser_vf_14.png') center center / cover no-repeat fixed;
   overflow: hidden;
 }
 
@@ -260,14 +260,12 @@ body {
 
 /* ── System overview ── */
 .system-fig {
-  width: 150%;
-  max-width: 1500px;
-  border-radius: 20px;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 12px;
   box-shadow: var(--card-shadow);
   display: block;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 0 auto;
 }
 
 .fig-caption {
@@ -537,20 +535,20 @@ footer.site-footer a {
 /* ── Teaser gallery ── */
 .teaser-banner {
   width: 100%;
-  height: 420px;
+  height: 280px;
   object-fit: cover;
   border-radius: 10px;
   box-shadow: var(--card-shadow);
   display: block;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 /* Two-column strip for side-by-side real-robot thumbnails */
 .teaser-strip {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .teaser-strip figure {
@@ -560,7 +558,7 @@ footer.site-footer a {
 
 .teaser-strip img {
   width: 100%;
-  height: 260px;
+  height: 170px;
   object-fit: cover;
   border-radius: 8px;
   box-shadow: var(--card-shadow);
@@ -587,8 +585,8 @@ footer.site-footer a {
 .teaser-experiment {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .teaser-experiment figure {
@@ -632,22 +630,25 @@ footer.site-footer a {
 .teaser-solo {
   display: flex;
   justify-content: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .teaser-solo img {
   width: 100%;
+  max-width: 620px;
   border-radius: 10px;
   box-shadow: var(--card-shadow);
+  margin: 0 auto;
+  display: block;
 }
 
 @media (max-width: 640px) {
   .teaser-strip {
     grid-template-columns: 1fr;
   }
-  .teaser-banner { height: 220px; }
-  .teaser-strip img { height: 200px; }
-  .teaser-solo img { width: 100%; }
+  .teaser-banner { height: 160px; }
+  .teaser-strip img { height: 130px; }
+  .teaser-solo img { width: 100%; max-width: 100%; }
 }
 
 /* ── Utility ── */
@@ -766,12 +767,9 @@ footer.site-footer a {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border: 1.5px dashed #3d3d5c;
-  transition: border-color 0.2s;
 }
 
 .video-ph:hover {
-  border-color: var(--pita-accent);
 }
 
 /* When a real <video> is placed, hide the placeholder overlay */
