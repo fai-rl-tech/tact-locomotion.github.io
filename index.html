@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+      content="TACT-ful: Multi-Channel Terrain Affordance and Compliance Training for Payload-Robust Perceptive Humanoid Locomotion. Under Review.">
+    <meta name="keywords"
+      content="humanoid locomotion, terrain affordance, DCM foothold planning, reinforcement learning, payload generalization, perceptive locomotion, depth camera, Under Review">
+
+    <title>TACT-ful: Multi-Channel Terrain Affordance and Compliance Training
+      for Payload-Robust Perceptive Humanoid Locomotion
+    </title>
+
+    <!-- Open Graph -->
+    <meta property="og:title"
+      content="TACT-ful: Multi-Channel Terrain Affordance and Compliance Training for Payload-Robust Perceptive Humanoid Locomotion">
+    <meta property="og:description"
+      content="TACT-ful: Multi-channel terrain cost for DCM foothold planning and RL reward shaping, with lower-body compliance training for zero-shot payload generalization on service humanoids.">
+    <meta property="og:image" content="./static/images/teaser_vf_14.png">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" href="./static/images/icon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&family=Orbitron:wght@700;900&family=Rajdhani:wght@600;700&family=Exo+2:wght@700;800&family=Audiowide&family=Oxanium:wght@700;800&family=DM+Sans:wght@700;800&family=Outfit:wght@700;800&family=Plus+Jakarta+Sans:wght@700;800&family=Syne:wght@700;800&family=Bebas+Neue&family=Oswald:wght@600;700&family=Barlow+Condensed:wght@600;700&family=Montserrat:wght@700;800&display=swap"
+      rel="stylesheet">
+
+    <!-- Academicons -->
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Bulma -->
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+
+    <!-- MathJax for inline math rendering -->
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
+  </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+      async></script>
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="./static/css/index.css">
+
+    <style>
+    /* ── TLDR section ── */
+    .section-tldr {
+      background: linear-gradient(145deg, #f0f2ff 0%, #e8eaf6 100%);
+    }
+    .tldr-intro {
+      text-align: center;
+      font-size: 1.0rem;
+      color: #444;
+      font-weight: 500;
+      margin: 0 auto 1.5rem;
+      max-width: 680px;
+      line-height: 1.65;
+    }
+    .tldr-points {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+    .tldr-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      background: #fff;
+      border-radius: 10px;
+      padding: 0.8rem 1.1rem;
+      box-shadow: 0 1px 5px rgba(57,73,171,0.09);
+      border-left: 4px solid #3949ab;
+    }
+    .tldr-num {
+      flex-shrink: 0;
+      width: 1.75rem; height: 1.75rem;
+      background: #3949ab;
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.84rem;
+      margin-top: 0.1rem;
+    }
+    .tldr-text {
+      font-size: 0.88rem;
+      color: #333;
+      line-height: 1.65;
+    }
+    .tldr-text strong { color: #1a237e; }
+
+    /* ── presentation iframe ── */
+    .pres-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 63.64%; /* 700 / 1100 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 24px rgba(57,73,171,0.18);
+      border: 1px solid #c5cae9;
+    }
+    .pres-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .pres-caption {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #999;
+      margin-top: 0.65rem;
+    }
+    .pres-caption a {
+      color: #3949ab;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .pres-caption a:hover { text-decoration: underline; }
+  </style>
+  </head>
+
+  <body>
+
+    <!-- ═══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════ -->
+    <section class="hero-paper" id="top">
+
+      <!-- Desktop navbar -->
+      <nav class="hero-navbar">
+        <a href="./static/tactful.pdf" target="_blank">
+          <i class="fas fa-file-pdf"></i> Paper
+        </a>
+        <a href="#" title="arXiv - coming soon">
+          <i class="ai ai-arxiv"></i> arXiv (Coming Soon)
+        </a>
+        <a href="./static/videos/TACT-ful_Video.mp4" target="_blank">
+          <i class="fab fa-youtube"></i> Video
+        </a>
+        <a href="#" target="_blank">
+          <i class="fab fa-github"></i> Code (Coming Soon)
+        </a>
+      </nav>
+
+      <!-- Centered hero text -->
+      <div class="hero-body-content">
+        <div class="pita-acronym">TACT<span
+            class="acronym-suffix">ful</span></div>
+        <div class="paper-title-hero">
+          Multi-Channel <span class="acr-letter">T</span>errain <span
+            class="acr-letter">A</span>ffordance and <span
+            class="acr-letter">C</span>ompliance <span
+            class="acr-letter">T</span>raining<br>
+          for Payload-Robust Perceptive Humanoid Locomotion
+        </div>
+        <div class="venue-badge">Under Review</div>
+
+        <!-- Mobile link buttons -->
+        <div class="link-buttons" style="margin-top:0.5rem;">
+          <a class="link-btn btn-dark" href="./static/tactful.pdf"
+            target="_blank">
+            <i class="fas fa-file-pdf"></i> Paper
+          </a>
+          <a class="link-btn btn-dark" href="#">
+            <i class="ai ai-arxiv"></i> arXiv (Coming Soon)
+          </a>
+          <a class="link-btn btn-dark" href="./static/videos/TACT-ful_Video.mp4"
+            target="_blank">
+            <i class="fab fa-youtube"></i> Video
+          </a>
+          <a class="link-btn btn-dark" href="#" target="_blank">
+            <i class="fab fa-github"></i> Code (Coming Soon)
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     AUTHORS
+══════════════════════════════════════════════════ -->
+    <section class="authors-section" id="authors">
+      <div class="narrow">
+        <p class="paper-title-main">
+          TACT-ful: Multi-Channel Terrain Affordance and Compliance Training for
+          Payload-Robust Perceptive Humanoid Locomotion
+        </p>
+        <p class="authors-block">
+          Anonymous Authors
+        </p>
+        <p class="affil-block">Anonymous Institution &nbsp;·&nbsp; <em>Author
+            list omitted for double-blind review</em>
+        </p>
+
+        <div class="link-buttons">
+          <a class="link-btn btn-dark" href="./static/tactful.pdf"
+            target="_blank">
+            <i class="fas fa-file-pdf"></i> Paper
+          </a>
+          <a class="link-btn btn-dark" href="#">
+            <i class="ai ai-arxiv"></i> arXiv (Coming Soon)
+          </a>
+          <a class="link-btn btn-dark" href="./static/videos/TACT-ful_Video.mp4"
+            target="_blank">
+            <i class="fab fa-youtube"></i> Video
+          </a>
+          <a class="link-btn btn-outline" href="#" target="_blank">
+            <i class="fab fa-github"></i> Code (Coming Soon)
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     TEASER GALLERY
+══════════════════════════════════════════════════ -->
+    <section class="section-pad" id="teaser" style="padding-top:1.5rem;">
+      <div style="max-width:860px;margin:0 auto;padding:0 1rem;">
+
+        <!-- Row 1: full-width banner -->
+        <img class="teaser-banner" src="./static/images/teaser_vf1.png"
+          alt="Service humanoid traversing stairs with payload">
+
+        <!-- Row 2: two equal real-robot thumbnails -->
+        <!-- <div class="teaser-strip"> -->
+        <!-- <figure> -->
+        <!-- <img src="./static/images/teaser_vf2.png" -->
+        <!-- alt="Real robot stair traversal - front view"> -->
+        <!-- <figcaption>Real robot · stair traversal</figcaption> -->
+        <!-- </figure> -->
+        <!-- <figure> -->
+        <!-- <img src="./static/images/teaser_vf3.png" -->
+        <!-- alt="Real robot stair traversal - side view"> -->
+        <!--<figcaption>Real robot · with payload</figcaption>-->
+        <!-- </figure> -->
+        <!-- </div> -->
+
+        <!-- Row 3: teaser_2 centered standalone -->
+        <div class="teaser-solo">
+          <img src="./static/images/teaser_2.png"
+            alt="Terrain affordance map and foothold selection">
+        </div>
+
+        <!-- Row 4: two equal real-robot down and up stair traversal thumbnails -->
+        <div class="teaser-experiment">
+          <figure>
+            <img src="./static/images/F6.Experiment_down.png"
+              alt="Real robot descending stairs">
+            <!--<figcaption>↓ Descending stairs</figcaption>-->
+          </figure>
+          <figure>
+            <img src="./static/images/F6.Experiment_up.png"
+              alt="Real robot ascending stairs">
+            <!--<figcaption>↑ Ascending stairs</figcaption>-->
+          </figure>
+        </div>
+
+        <p class="fig-caption mt-2">
+          <strong>Figure 1.</strong> A service humanoid traversing structured
+          non-flat terrain while carrying a payload.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     TL;DR + PRESENTATION EMBED
+══════════════════════════════════════════════════ -->
+    <section class="section-pad section-tldr" id="tldr">
+      <div class="narrow">
+        <h2 class="section-title">TL;DR</h2>
+        <hr
+          style="border:none;border-top:3px solid #3949ab;width:60px;margin:0.5rem auto 1.2rem;">
+
+        <p class="tldr-intro">
+          Three ideas trained in one standard PPO run — no distillation, no
+          force sensors, no teacher-student staging.
+        </p>
+
+        <div class="tldr-points">
+          <div class="tldr-point">
+            <div class="tldr-num">1</div>
+            <div class="tldr-text">
+              <strong>Terrain cost ($Q$, $E$, $M$) + Bézier swing</strong> drive
+              the DCM foothold planner, shape RL rewards, and orient the sole at
+              riser crossings.
+            </div>
+          </div>
+          <div class="tldr-point">
+            <div class="tldr-num">2</div>
+            <div class="tldr-text">
+              <strong>Virtual wrench injection</strong> at sampled body points
+              trains payload compliance without a force sensor or payload mass
+              in simulation.
+            </div>
+          </div>
+          <div class="tldr-point">
+            <div class="tldr-num">3</div>
+            <div class="tldr-text">
+              <strong>Zero-shot sim-to-real</strong> on a service humanoid: 1.0
+              m/s on 0.20 m risers, up to 20 kg payload, no hardware
+              fine-tuning.
+            </div>
+          </div>
+        </div>
+
+        <div class="pres-wrapper">
+          <iframe src="./slides_video.html"
+            title="TACT-ful — video presentation"
+            allow="fullscreen"
+            loading="lazy"></iframe>
+        </div>
+        <p class="pres-caption">
+          21-slide video presentation — arrow keys or click to navigate
+          &nbsp;·&nbsp;
+          <a href="./slides_video.html" target="_blank">Open full page →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     ABSTRACT
+══════════════════════════════════════════════════ -->
+    <section class="section-pad section-gray" id="abstract">
+      <div class="narrow">
+        <h2 class="section-title">Abstract</h2>
+        <hr
+          style="border:none;border-top:3px solid #3949ab;width:60px;margin:0.5rem auto 1.5rem;">
+        <p class="abstract-text">
+          Foothold selection on structured terrain requires explicit reasoning
+          about contact planarity, surface steepness, and kinematic
+          reachability, properties not captured by a single height-based terrain
+          signal.
+          We propose a multi-channel terrain cost combining flatness, steepness,
+          and velocity-aware height feasibility, plus a forward climb reward,
+          that simultaneously drives a GPU-parallel divergent component of
+          motion (DCM) foothold planner and shapes a dense per-step affordance
+          reward for an asymmetric actor-critic policy trained with proximal
+          policy optimization (PPO) from depth images.
+          A Bézier swing trajectory with adaptive apex bias extends foothold
+          tracking to joint position-and-orientation, using the arc tangent to
+          guide sole orientation through riser crossings and tread landings.
+          To support payload tasks, we introduce a lower-body compliance
+          training procedure in which a virtual wrench is injected at a sampled
+          load attachment point, generating physically consistent force and
+          moment;
+          wrench-aware compliance targets replace rigid pose penalties, and the
+          policy learns to yield to load-induced perturbations without force
+          sensing.
+          The full system trains end-to-end with standard PPO, no distillation,
+          and no teacher-student staging, and is deployed on a humanoid directly
+          from simulation with configuration changes only.
+          In simulation, the policy reaches $1.0~\mathrm{m/s}$ on stairs with
+          risers up to $0.20~\mathrm{m}$ and improves payload robustness up to
+          ${\sim}15~\mathrm{kg}$ centered load and for moment-dominated wrist
+          loads without fine-tuning.
+          We also provide a qualitative hardware demonstration on structured
+          terrain.
+        </p>
+
+        <div class="keywords-block mt-3">
+          <span class="kw-tag">Humanoid Locomotion</span>
+          <span class="kw-tag">Terrain Affordance Learning</span>
+          <span class="kw-tag">Payload Compliance</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     SYSTEM OVERVIEW
+══════════════════════════════════════════════════ -->
+    <section class="section-pad" id="overview">
+      <div style="max-width:1060px;margin:0 auto;">
+        <h2 class="section-title">System Overview</h2>
+        <hr
+          style="border:none;border-top:3px solid #3949ab;width:60px;margin:0.5rem auto 1.5rem;">
+        <img class="system-fig"
+          src="./static/images/System Overview - Perceptive.svg"
+          alt="Overview of the proposed framework">
+        <p class="fig-caption">
+          <strong>Figure 2.</strong> Overview of the proposed framework.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     KEY CONTRIBUTIONS
+══════════════════════════════════════════════════ -->
+    <section class="section-pad section-gray" id="contributions">
+      <div class="narrow">
+        <h2 class="section-title">Key Contributions</h2>
+        <hr
+          style="border:none;border-top:3px solid #3949ab;width:60px;margin:0.5rem auto 2rem;">
+
+        <div class="columns is-multiline is-variable is-4">
+
+          <!-- Contribution 1 -->
+          <div class="column is-one-third-desktop is-half-tablet">
+            <div class="contrib-card">
+              <div class="contrib-icon"><i class="fas fa-layer-group"></i></div>
+              <div class="contrib-title">Multi-Channel Terrain Cost with
+                Terrain-Adaptive Swing and Tangent-Guided Foot Orientation</div>
+              <p class="contrib-text">
+                Flatness ($Q$), steepness ($E$), velocity-aware height
+                feasibility ($M$), and a climb bonus
+                jointly drive a GPU-parallel DCM foothold planner and serve as a
+                dense terrain-affordance
+                learning signal for the RL policy. A Bézier swing trajectory
+                with adaptive apex bias and
+                clearance extends foothold tracking to joint
+                position-and-orientation references, using the
+                arc tangent to guide sole orientation through riser crossings
+                and tread landings.
+              </p>
+              <div class="contrib-tags">
+                <span class="tag-pill">Q · Flatness</span>
+                <span class="tag-pill">E · Steepness</span>
+                <span class="tag-pill">M · Height Feasibility</span>
+                <span class="tag-pill">Bézier Swing</span>
+                <span class="tag-pill">DCM Planner</span>
+                <span class="tag-pill">Tangent-Guided Orientation</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contribution 2 -->
+          <div class="column is-one-third-desktop is-half-tablet">
+            <div class="contrib-card">
+              <div class="contrib-icon"><i
+                  class="fas fa-arrows-down-to-line"></i></div>
+              <div class="contrib-title">Lower-Body Compliance Training for
+                Payload-Robust Locomotion</div>
+              <p class="contrib-text">
+                A virtual wrench injected at a sampled load attachment point
+                generates physically consistent
+                force and moment; together with wrench-aware compliance targets
+                for pelvis height and trunk
+                orientation, it teaches the policy to yield to payload-induced
+                perturbations without force
+                sensing, improving robustness up to ${\sim}15\,\text{kg}$
+                centered load and for
+                moment-dominated wrist loads without payload-specific
+                fine-tuning.
+              </p>
+              <div class="contrib-tags">
+                <span class="tag-pill">Virtual Wrench Injection</span>
+                <span class="tag-pill">Cosine-Power Sampling</span>
+                <span class="tag-pill">Wrench-Aware Targets</span>
+                <span class="tag-pill">~15 kg Zero-Shot</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contribution 3 -->
+          <div class="column is-one-third-desktop is-half-tablet">
+            <div class="contrib-card">
+              <div class="contrib-icon"><i class="fas fa-microchip"></i></div>
+              <div class="contrib-title">Integrated End-to-End Pipeline with a
+                Qualitative Hardware Demonstration</div>
+              <p class="contrib-text">
+                The system trains with standard PPO in a single run (no
+                distillation, no teacher-student
+                staging) and combines terrain-aware foothold selection with
+                payload compliance, deployed
+                zero-shot from simulation on a service humanoid traversing
+                structured terrain while carrying
+                payload.
+              </p>
+              <div class="contrib-tags">
+                <span class="tag-pill">Standard PPO</span>
+                <span class="tag-pill">No Distillation</span>
+                <span class="tag-pill">Sim-to-Real</span>
+                <span class="tag-pill">Hardware Demo</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     METHOD DETAIL - MULTI-CHANNEL TERRAIN COST
+══════════════════════════════════════════════════ -->
+    <section class="section-pad" id="method">
+      <div class="narrow">
+        <h2 class="section-title">Method</h2>
+        <hr
+          style="border:none;border-top:3px solid #3949ab;width:60px;margin:0.5rem auto 2rem;">
+
+        <!-- DCM / Terrain Cost -->
+        <div style="margin-bottom:3rem;">
+          <h3
+            style="font-size:1.25rem;font-weight:700;color:#1a237e;margin-bottom:0.8rem;">
+            Multi-Channel Terrain Cost &amp; DCM Foothold Planning
+          </h3>
+          <p
+            style="font-size:0.9rem;line-height:1.8;color:#444;margin-bottom:1rem;">
+            The planner selects the candidate foothold cell $i$ that minimises a
+            total cost
+            $$\mathcal{J}_i = \alpha_{\text{pos}}\,d_{\text{pos},i}
+            + \alpha_{\text{dcm}}\,d_{\text{dcm},i}
+            + \alpha_E E_i + \alpha_Q Q_i + \alpha_M M_i
+            - \alpha_{\text{climb}}\,b_i,$$
+            where the three terrain channels are:
+          </p>
+          <div class="columns is-variable is-4">
+            <div class="column">
+              <div style="background:#e8eaf6;border-radius:8px;padding:1rem;">
+                <strong style="color:#1a237e;">Flatness $Q_i$</strong><br>
+                <!--<span style="font-size:0.85rem;color:#555;">
+                Elevation range (max − min) over a footprint-sized kernel. A sole straddling a height
+                discontinuity tilts, reducing friction cone admissibility. Range correctly flags a foot
+                split across two tread levels even when each half is individually flat.
+              </span>-->
+              </div>
+            </div>
+            <div class="column">
+              <div style="background:#e8eaf6;border-radius:8px;padding:1rem;">
+                <strong style="color:#1a237e;">Steepness $E_i$</strong><br>
+                <!--<span style="font-size:0.85rem;color:#555;">
+                Max-pooled Sobel gradient magnitude over the footprint. Max pooling deliberately propagates
+                the worst gradient: a foot partially overlapping a riser registers the full riser steepness
+                even if the other half is flat.
+              </span>-->
+              </div>
+            </div>
+            <div class="column">
+              <div style="background:#e8eaf6;border-radius:8px;padding:1rem;">
+                <strong style="color:#1a237e;">Height Feasibility
+                  $M_i$</strong><br>
+                <!--<span style="font-size:0.85rem;color:#555;">
+                Quadratic penalty above a velocity-aware effective step-height limit
+                $h^*_\text{eff}(v_x)$. At low speed the robot lacks leg momentum for tall step-ups;
+                at rated speed the dynamic drive can clear the full height.
+              </span>-->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bézier Trajectories -->
+        <div>
+          <h3
+            style="font-size:1.25rem;font-weight:700;color:#1a237e;margin-bottom:0.8rem;">
+            Bézier Swing Trajectories with Adaptive Apex Bias
+          </h3>
+          <p
+            style="font-size:0.9rem;line-height:1.8;color:#444;margin-bottom:1.2rem;">
+            After selecting per-foot landing target $\mathbf{p}^*_f$, the swing
+            foot tracks
+            a quadratic Bézier arc whose tangent simultaneously determines foot
+            orientation:
+            $$\left\{\begin{aligned}
+            \mathbf{p}(u) &= {(1-u)}^2\,\mathbf{p}_\ell +
+            2(1-u)u\,\mathbf{p}_{\mathrm{apex}} + u^2\,\mathbf{p}^*_f,\\
+            \dot{\mathbf{p}}(u) &=
+            2(1-u)(\mathbf{p}_{\mathrm{apex}}-\mathbf{p}_\ell) +
+            2u(\mathbf{p}^*_f-\mathbf{p}_{\mathrm{apex}}),
+            \end{aligned}\right.\quad u\in[0,1]$$
+            where $\mathbf{p}_\ell$ is the lift-off position and
+            $\dot{\mathbf{p}}(u)$ points in the
+            direction of instantaneous foot travel. The apex $xy$ is biased
+            toward whichever endpoint
+            is higher:
+            $$\mathrm{bias} = \mathrm{clip}\!\left(0.5 + \kappa\,\frac{\Delta
+            z}{h^*_{\max}},\;b_{\min},\;b_{\max}\right),
+            \qquad \mathbf{p}_{\mathrm{apex},xy} =
+            (1-\mathrm{bias})\,\mathbf{p}_{\ell,xy} +
+            \mathrm{bias}\,\mathbf{p}^*_{f,xy}.$$
+            For step-up ($\Delta z > 0$), bias $> 0.5$ places the trajectory
+            peak over the riser face,
+            preventing premature descent onto the vertical surface; for
+            step-down ($\Delta z < 0$),
+            bias $< 0.5$ extends horizontal travel before descent, reducing the
+            landing impact angle.
+            The apex height adapts to terrain relief:
+            $$c = \min\!\bigl(c_{\min} + s\,|\Delta z|,\;c_{\max}\bigr),
+            \qquad z_{\mathrm{apex}} = 2\bigl(\max(z_\ell,\,z^*_f) + c\bigr) -
+            \tfrac{1}{2}(z_\ell + z^*_f).$$
+            The tangent is vertical at
+            $$u_{\mathrm{peak}} = \frac{z_\ell - z_{\mathrm{apex}}}{z_\ell -
+            2z_{\mathrm{apex}} + z^*_f},$$
+            equal to $0.5$ for level steps and shifting toward the higher
+            endpoint on transitions.
+            A phase-conditional schedule derived from $\dot{\mathbf{p}}(u)$
+            guides sole orientation
+            through two windows around $u_{\mathrm{peak}}$: in the
+            <em>pre-apex</em> window,
+            $\dot{\mathbf{p}}$ is rotated $90°$ in the sagittal plane
+            ($(t_x,t_y,t_z)\!\mapsto\!(t_z,t_y,{-}t_x)$) and normalized,
+            yielding a forward-downward direction that guides the sole through
+            the riser and reduces
+            toe-strike risk; in the <em>post-apex</em> window,
+            $\hat{\mathbf{t}}_f = \dot{\mathbf{p}}/\|\dot{\mathbf{p}}\|$ aligns
+            the foot with the
+            forward travel direction for tread landing; elsewhere no orientation
+            constraint is applied.
+            Both position proximity and foot heading are jointly optimized
+            during swing
+            via an exponential proximity kernel
+            $$r_{\mathrm{foothold}} = \sum_f I_{\mathrm{swing},f}
+            \exp\!\bigl(-\sigma_p\,\|\mathbf{p}_f -
+            \mathbf{p}_{\mathrm{B\acute{e}z}}(t)\|^2
+            -\sigma_d\,\|\hat{\mathbf{d}}_f - \hat{\mathbf{t}}_f(u)\|^2\bigr),$$
+            where $\hat{\mathbf{d}}_f = R_f\hat{\mathbf{e}}_x$ is the foot
+            forward axis and
+            $\sigma_d = 0$ recovers the position-only form when orientation is
+            not used.
+          </p>
+          <div class="bezier-grid">
+            <div class="bezier-item">
+              <img src="./static/images/bezier_step_up.png"
+                alt="Bézier trajectory for step-up">
+              <div class="bezier-label">(a) Step-Up &mdash; apex biased over
+                riser face</div>
+            </div>
+            <div class="bezier-item">
+              <img src="./static/images/bezier_step_down.png"
+                alt="Bézier trajectory for step-down">
+              <div class="bezier-label">(b) Step-Down &mdash; extended
+                horizontal travel before descent</div>
+            </div>
+            <div class="bezier-item">
+              <img src="./static/images/bezier_gap.png"
+                alt="Bézier trajectory for gap crossing">
+              <div class="bezier-label">(c) Gap Crossing</div>
+            </div>
+            <div class="bezier-item">
+              <img src="./static/images/bezier_flat.png"
+                alt="Bézier trajectory on flat terrain">
+              <div class="bezier-label">(d) Flat Terrain &mdash; symmetric
+                arc</div>
+            </div>
+          </div>
+          <p class="fig-caption mt-2">
+            <strong>Figure 3.</strong> Adaptive Bézier apex bias for four
+            terrain transitions.
+          </p>
+        </div>
+
+        <!-- Compliance Training -->
+        <div style="margin-top:3rem;">
+          <h3
+            style="font-size:1.25rem;font-weight:700;color:#1a237e;margin-bottom:0.8rem;">
+            Lower Body Compliance via Cosine-Power-Weighted Force Injection
+          </h3>
+          <div style="text-align:center;max-width:560px;margin:1.5rem auto 0;">
+            <img src="./static/images/body_point_cloud.png"
+              alt="Body attachment point cloud for wrench sampling"
+              style="width:100%;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.13);">
+          </div>
+          <p class="fig-caption mt-2">
+            <strong>Figure 4.</strong> Candidate load attachment points
+            $\mathbf{p}_\text{load}$ sampled uniformly from the robot body
+            surface. Body-attached samples cover centred loads; arm-extended
+            samples cover large moment arms. These positions define the
+            virtual spring-damper anchor during compliance training.
+          </p>
+          <p style="font-size:0.9rem;line-height:1.8;color:#444;">
+            A payload exerts a wrench
+            $\mathbf{W}=(\mathbf{F},\boldsymbol{\tau})$ on the robot, where
+            the moment
+            $\boldsymbol{\tau}=\mathbf{r}_\mathrm{load}\times\mathbf{F}$ scales
+            with the
+            CoM-to-load arm $\mathbf{r}_\mathrm{load}$ independently of mass.
+            $\boldsymbol{\tau}_\mathrm{ext}$ tilts the trunk by $\varphi$,
+            displacing the CoM by
+            $\Delta x_\mathrm{CoM}\approx d_\mathrm{CoM}\varphi$; under LIPM
+            this offset grows by
+            $e^{\omega_0 T_\mathrm{step}}>2$ over a typical step, so
+            moment-induced tilt perturbs the
+            capture point more than an equivalent translational offset, and both
+            components of
+            $\mathbf{W}$ require explicit coverage in the disturbance
+            distribution.
+            We emulate the wrench by applying a spring-damper at the <em>virtual
+              load attachment
+              point</em> $\mathbf{p}_\mathrm{load} = \mathbf{p}_\mathrm{CoM} +
+            \mathbf{r}_\mathrm{load}$:
+            $$\mathbf{F}_\mathrm{ext}(t) = k\bigl(\mathbf{p}_a -
+            \mathbf{p}_\mathrm{load}(t)\bigr)
+            - c\,\dot{\mathbf{p}}_\mathrm{load}(t),$$
+            where $\mathbf{p}_a$ is a fixed world-frame anchor drawn once per
+            episode, with stiffness
+            $k$ and damping $c$ set so the spring force at maximum displacement
+            $R_a$ reaches a fixed
+            fraction of nominal weight. Applying the force at
+            $\mathbf{p}_\mathrm{load}$ rather than
+            the CoM generates
+            $\boldsymbol{\tau}_\mathrm{ext} =
+            \mathbf{r}_\mathrm{load}\times\mathbf{F}_\mathrm{ext}$
+            automatically. At each reset, $\mathbf{r}_\mathrm{load}$ is drawn
+            from a two-component
+            mixture that jointly covers both carry scenarios:
+            <em>body-attached</em> with
+            $\mathbf{r}_\mathrm{body}\sim\mathrm{Ball}(R_\mathrm{close})$,
+            direction biased toward
+            $-\hat{\mathbf{z}}$; and <em>arm-extended</em> with
+            $\mathbf{r}_\mathrm{arm}$ from a
+            shoulder-frame half-ellipsoid, biased forward.
+            Both components use cosine-power lobes to concentrate sampling:
+            $$\left\{\begin{aligned}
+            p(\hat{\mathbf{d}}) &\propto \cos^{n}\theta,\quad \theta\in[0,\pi/2]
+            &&\text{(body-attached direction)},\\
+            p(\mathbf{r}_\mathrm{arm}) &\propto
+            \cos^{n_r}\!\bigl(\angle(\mathbf{r}_\mathrm{arm},\hat{\mathbf{x}}_\mathrm{shoulder})\bigr)
+            &&\text{(arm-extended bias)},
+            \end{aligned}\right.$$
+            where $\hat{\mathbf{d}}$ is the unit direction of
+            $\mathbf{r}_\mathrm{body}$ and $\theta$
+            its polar angle from $-\hat{\mathbf{z}}$. A weight-$\epsilon$
+            isotropic component blends
+            in lateral and overhead samples.
+            Rigid height and orientation penalties are replaced with
+            wrench-aware compliance targets:
+            $$z^*_\mathrm{virt} = h^\mathrm{terrain}_\mathrm{pelvis} + h^*
+            + \alpha_z\!\left(z_a - h^\mathrm{terrain}_\mathrm{pelvis} -
+            h^*\right),
+            \qquad
+            \varphi^*_\mathrm{virt} =
+            \alpha_\varphi\,\frac{\tau_y}{k_\mathrm{rot}},\quad
+            \psi^*_\mathrm{virt} = \alpha_\psi\,\frac{\tau_x}{k_\mathrm{rot}}.$$
+            The combined compliance reward
+            $$r_\mathrm{comply} = -(z_\mathrm{pelvis}-z^*_\mathrm{virt})^2
+            - (\varphi_B-\varphi^*_\mathrm{virt})^2 -
+            (\psi_B-\psi^*_\mathrm{virt})^2,$$
+            where $\varphi_B,\psi_B$ are pelvis pitch and roll from the
+            projected gravity vector.
+            When $\alpha_z = \alpha_\varphi = \alpha_\psi = 0$ the reward
+            collapses to the original
+            rigid height and orientation penalties; at nonzero gains the policy
+            learns to yield to the
+            full wrench, acquiring wrench-aware compliance in both translation
+            and rotation as a learned
+            behavior without explicit force or torque sensing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     RESULTS
+══════════════════════════════════════════════════ -->
+    <section class="section-pad section-gray" id="results">
+      <div class="narrow">
+        <h2 class="section-title">Results</h2>
+        <hr
+          style="border:none;border-top:3px solid #3949ab;width:60px;margin:0.5rem auto 2rem;">
+
+        <!-- Highlight banner -->
+        <div class="results-banner">
+          <h3>Performance Highlights</h3>
+          <div class="stat-row">
+            <div class="stat-item">
+              <div class="stat-value">1.0 m/s</div>
+              <div class="stat-label">on stairs with<br>0.20 m risers</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">~15 kg</div>
+              <div class="stat-label">centered load<br>zero-shot</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">12 DOF</div>
+              <div class="stat-label">leg joints,<br>depth-camera actor</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">50 Hz</div>
+              <div class="stat-label">policy frequency<br>on hardware</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terrain Traversal Ablation -->
+        <h3
+          style="font-size:1.15rem;font-weight:700;color:#1a237e;margin:2.5rem 0 0.8rem;">
+          Terrain Traversal Ablation
+        </h3>
+        <p
+          style="font-size:0.9rem;line-height:1.8;color:#444;margin-bottom:1.2rem;">
+          Four variants are compared: <strong>TACT + Adaptive Gait
+            (Ours)</strong>, TACT-only,
+          Adaptive Gait only, and Baseline (standard depth-map policy, no
+          terrain-cost channels).
+          Each is evaluated at 20&thinsp;k iterations across 4096 MuJoCo
+          environments on stairs,
+          slopes, and rough terrain; a held-out hard-terrain sweep (risers
+          0.20-0.30&thinsp;m)
+          reports SR<sub>hard</sub> on the strict interior [0.22,
+          0.28]&thinsp;m.
+          Ours leads on both regimes (70% standard SR, 30% SR<sub>hard</sub>),
+          outperforming
+          TACT-only by 13 and 9&thinsp;pp and Adaptive Gait only by 17 and
+          12&thinsp;pp.
+          Adaptive Gait only falls <em>below</em> the Baseline on hard terrain
+          (18% vs. 19%),
+          confirming that frequency re-timing without terrain-quality guidance
+          is actively harmful
+          when risers approach kinematic limits. The Baseline's 52% and 19% SR
+          coincide with the
+          highest 95th-percentile GRF (${\approx}6.7\times$ and
+          $8.0\times\,mg/2$), consistent
+          with edge-biased contacts. Removing all TACT channel weights raises
+          foot-target distance
+          $2.8\times$ (0.088 → 0.251&thinsp;m), and the SR gap relative to the
+          Baseline is
+          speed-invariant (71 / 68 / 69% at 0.3 / 0.6 / 1.0&thinsp;m/s),
+          confirming foothold
+          quality, not speed, drives the difference.
+        </p>
+
+        <div
+          style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:0.5rem;">
+          <figure style="margin:0;">
+            <img src="./static/images/ablation_normal.png"
+              alt="Terrain traversal ablation - standard terrain"
+              style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+          </figure>
+          <figure style="margin:0;">
+            <img src="./static/images/ablation_hard_terrain.png"
+              alt="Terrain traversal ablation - hard terrain (out-of-distribution)"
+              style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+          </figure>
+        </div>
+        <p class="fig-caption mt-1">
+          <strong>Figure 5.</strong> Terrain traversal ablation on
+          <strong>standard terrain</strong> (top)
+          and <strong>hard terrain</strong> - out-of-distribution risers
+          0.20-0.30&thinsp;m (bottom).
+        </p>
+
+        <!-- Speed / foot-target / payload row -->
+        <h3
+          style="font-size:1.15rem;font-weight:700;color:#1a237e;margin:2.5rem 0 0.8rem;">
+          Payload Generalization
+        </h3>
+        <p
+          style="font-size:0.9rem;line-height:1.8;color:#444;margin-bottom:1.2rem;">
+          Three attachment conditions are tested at deployment time (no policy
+          change): pelvis-mounted
+          +15&thinsp;kg and +20&thinsp;kg (centered CoM offset) and
+          wrist-mounted +10&thinsp;kg
+          (large moment arm). At moderate centered load (+15&thinsp;kg), Ours
+          achieves <strong>50%
+            SR vs. 38%</strong> at lower power (247&thinsp;W vs. 277&thinsp;W),
+          consistent with
+          compliance training absorbing the downward wrench. At high centered
+          load (+20&thinsp;kg)
+          both policies degrade to ${\approx}37\%$ and ${\approx}35\%$ SR, the
+          load approaches
+          the boundary of the training distribution, yet Ours remains
+          27&thinsp;W below the
+          Baseline (293 vs. 320&thinsp;W), confirming partial compliance is
+          retained. The
+          wrist-mounted condition yields the largest margin: <strong>65% SR vs.
+            50%</strong> at
+          223&thinsp;W vs. 259&thinsp;W, consistent with the arm-extended wrench
+          samples explicitly
+          targeting moment-dominated loads.
+        </p>
+
+        <div
+          style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-start;margin-bottom:0.5rem;">
+          <figure style="flex:1;min-width:180px;margin:0;text-align:center;">
+            <img src="./static/images/sr_speed.png"
+              alt="Speed-conditioned success rate"
+              style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+            <figcaption
+              style="font-size:0.78rem;color:#666;margin-top:0.3rem;">(a)
+              Speed-conditioned SR</figcaption>
+          </figure>
+          <figure style="flex:1;min-width:180px;margin:0;text-align:center;">
+            <img src="./static/images/foot_target_dist.png"
+              alt="Foot-target distance"
+              style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+            <figcaption
+              style="font-size:0.78rem;color:#666;margin-top:0.3rem;">(b)
+              Foot-target distance</figcaption>
+          </figure>
+          <figure style="flex:1;min-width:180px;margin:0;text-align:center;">
+            <img src="./static/images/payload_w_terrain.png"
+              alt="Payload SR and power"
+              style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+            <figcaption
+              style="font-size:0.78rem;color:#666;margin-top:0.3rem;">(c) SR (%)
+              and power (W)</figcaption>
+          </figure>
+        </div>
+
+        <!-- Hardware demo row -->
+        <div
+          style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-start;margin-bottom:0.5rem;">
+          <figure style="flex:1;min-width:180px;margin:0;text-align:center;">
+            <img src="./static/images/F6.Experiment_down.png"
+              alt="Hardware demo - descending stairs with 20 kg backpack"
+              style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+            <figcaption
+              style="font-size:0.78rem;color:#666;margin-top:0.3rem;">(d)
+              20&thinsp;kg backpack - descending</figcaption>
+          </figure>
+          <figure style="flex:1;min-width:180px;margin:0;text-align:center;">
+            <img src="./static/images/F6.Experiment_up.png"
+              alt="Hardware demo - ascending stairs with 20 kg backpack"
+              style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+            <figcaption
+              style="font-size:0.78rem;color:#666;margin-top:0.3rem;">(e)
+              20&thinsp;kg backpack - ascending</figcaption>
+          </figure>
+          <figure style="flex:1;min-width:180px;margin:0;text-align:center;">
+            <img src="./static/images/teaser_2.png"
+              alt="Hardware demo - 7 kg tray"
+              style="width:100%;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+            <figcaption
+              style="font-size:0.78rem;color:#666;margin-top:0.3rem;">(f)
+              7&thinsp;kg tray</figcaption>
+          </figure>
+        </div>
+        <p class="fig-caption mt-1">
+          <strong>Figure 6.</strong>
+          (a)&thinsp;Speed-conditioned SR; (b)&thinsp;foot-target distance
+          across ablation variants;
+          (c)&thinsp;SR (%) and mean power (W) under payload.
+          (d-f)&thinsp;Qualitative hardware payload demonstrations: 20&thinsp;kg
+          backpack descending
+          (d) and ascending (e) stairs; 7&thinsp;kg tray carried at arm's length
+          (f).
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     VIDEO RESULTS
+══════════════════════════════════════════════════ -->
+    <section class="section-pad section-gray" id="videos">
+      <div style="max-width:1140px;margin:0 auto;">
+        <h2 class="section-title">Video Results</h2>
+        <hr
+          style="border:none;border-top:3px solid #3949ab;width:60px;margin:0.5rem auto 0.6rem;">
+        <p class="section-subtitle">Simulation (top) and real robot (bottom)
+          demonstrations, zero-shot from simulation.</p>
+
+        <!-- ── Simulation videos (3 × 2) ── -->
+        <h3 style="font-size:1.05rem;font-weight:700;color:#1a237e;
+                   text-transform:uppercase;letter-spacing:0.06em;
+                   margin:1.4rem 0 0.75rem;border-left:3px solid #3949ab;
+                   padding-left:0.6rem;">Simulation</h3>
+        <div
+          style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;margin-bottom:2.2rem;">
+
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/vr_m3_1_nopayload.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Baseline · no
+              payload</p>
+          </div>
+
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/vr_m3_1_front_backpack.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Front-mounted backpack
+              · 5 kg</p>
+          </div>
+
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/vr_m3_1_backpack.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Rear-mounted backpack
+              · 5 kg</p>
+          </div>
+
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/vr_m3_1_both_backpack.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Front + rear backpacks
+              · 10 kg</p>
+          </div>
+
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/vr_m3_1_basket.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Basket · 5 × 1 kg
+              blocks</p>
+          </div>
+
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                style="object-position:right center;"
+                src="./static/videos/vr_m3_1_vf.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Car door · ~5 kg ·
+              largest moment arm</p>
+          </div>
+
+        </div>
+
+        <!-- ── Real robot videos (2 × 2) ── -->
+        <h3 style="font-size:1.05rem;font-weight:700;color:#1a237e;
+                   text-transform:uppercase;letter-spacing:0.06em;
+                   margin:0 0 0.75rem;border-left:3px solid #3949ab;
+                   padding-left:0.6rem;">Real Robot</h3>
+        <div
+          style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;">
+
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/stair_traversal.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Stair traversal ·
+              risers up to 0.20 m · 1.0 m/s</p>
+          </div>
+
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/up_stair_traversal_7kg.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Stair ascent ·
+              wrist-mounted payload · 7 kg</p>
+          </div>
+
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/down_stair_traversal.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Stair descent ·
+              rear-mounted backpack · 20 kg</p>
+          </div>
+
+          <div>
+            <div class="video-ph">
+              <video autoplay muted loop playsinline
+                src="./static/videos/up_stair_traversal.mp4"></video>
+            </div>
+            <p class="fig-cap" style="margin-top:0.4rem;">Stair ascent ·
+              rear-mounted backpack · 20 kg</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     BIBTEX
+══════════════════════════════════════════════════ -->
+    <section class="section-pad" id="bibtex">
+      <div class="narrow">
+        <h2 class="section-title">BibTeX</h2>
+        <hr
+          style="border:none;border-top:3px solid #3949ab;width:60px;margin:0.5rem auto 1.5rem;">
+        <div class="bibtex-block">
+          <button class="copy-btn" id="copy-bibtex"
+            title="Copy BibTeX">Copy</button>
+          <pre id="bibtex-text">@inproceedings{anonymous2026tactful,
+  title     = {TACT-ful: Multi-Channel Terrain Affordance and Compliance
+               Training for Payload-Robust Perceptive Humanoid Locomotion},
+  author    = {Anonymous Authors},
+  year      = {2026},
+  note      = {Under Review},
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════ -->
+    <footer class="site-footer">
+      <p>
+        Page template adapted from
+        <a href="https://nerfies.github.io" target="_blank">Nerfies</a> and
+        <a href="https://rpl-humanoid.github.io" target="_blank">RPL</a>.
+      </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+
+  </body>
+
+</html>
